@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
@@ -11,289 +11,44 @@
       <section class="mobile-scan">
         <div class="phone-frame capture-screen">
           <div class="scan-header">
-            <span class="scan-brand">
-              <small>Entertainment Palm Reading</small>
-              <b>Palmistry AI</b>
-            </span>
+            <span class="scan-brand"><small>Entertainment Palm Reading</small><b>Palmistry AI</b></span>
             <strong id="mobileProgress">0%</strong>
           </div>
-
           <div class="scan-stage" aria-label="손금 스캔 미리보기">
-            <div class="scan-grid"></div>
-            <div class="scan-ring"></div>
+            <div class="scan-grid"></div><div class="scan-ring"></div>
             <img class="scan-image" id="mobilePreview" alt="" />
             <div class="cyberpalm-title">CYBERPALM</div>
             <div class="hud-label hud-left-top">SCANNING...</div>
             <div class="hud-label hud-right-top">PALM ANALYSIS</div>
-            <div class="hud-score hud-right-mid">
-              <span>LIFE <strong>86%</strong></span>
-              <span>HEAD <strong>74%</strong></span>
-              <span>HEART <strong>92%</strong></span>
-            </div>
+            <div class="hud-score hud-right-mid"><span>LIFE <strong>86%</strong></span><span>HEAD <strong>74%</strong></span><span>HEART <strong>92%</strong></span></div>
             <img class="cyber-hand-art" src="./assets/cyberpalm-hand.png" alt="CYBERPALM 손금 스캔 이미지" />
             <svg class="palm-visual" viewBox="0 0 260 360" role="img" aria-label="손바닥 분석 라인">
               <path class="hand-fill" d="M76 314c-17-22-21-47-21-78v-56c0-12 9-22 21-22 8 0 15 4 19 11l2-88c0-13 10-23 23-23s22 10 22 23v86h8V52c0-14 11-25 25-25s24 11 24 25v117h8V78c0-13 10-23 23-23s23 10 23 23v121c9-11 27-8 32 7 3 8 2 17-3 25l-42 77c-14 26-38 41-67 41h-28c-27 0-51-13-69-35z" />
-              <g class="palm-detail">
-                <path d="M112 86v62M126 91v58M162 56v92M177 59v89M216 85v82M229 89v80" />
-                <path d="M94 184c16 14 35 19 56 16M101 238c23 8 48 7 73-2M118 275c26 7 51 5 75-7" />
-                <path d="M82 193c-11 12-16 27-14 45M151 315c-16-9-26-21-31-36M199 303c6-16 15-30 28-43" />
-                <path d="M143 117h14M143 137h15M166 97h16M168 124h15M215 126h14M216 151h13" />
-              </g>
-              <path class="line life" d="M110 180c-34 24-42 71-14 101 15 17 38 21 61 17" />
-              <path class="line head" d="M90 211c38-12 83-11 124 6" />
-              <path class="line heart" d="M95 162c32 14 69 12 109-7" />
-              <path class="line fate" d="M160 297c-8-48-4-91 9-132" />
-              <path class="line accent" d="M118 244c27-4 52 1 78 14" />
+              <g class="palm-detail"><path d="M112 86v62M126 91v58M162 56v92M177 59v89M216 85v82M229 89v80" /><path d="M94 184c16 14 35 19 56 16M101 238c23 8 48 7 73-2M118 275c26 7 51 5 75-7" /><path d="M82 193c-11 12-16 27-14 45M151 315c-16-9-26-21-31-36M199 303c6-16 15-30 28-43" /><path d="M143 117h14M143 137h15M166 97h16M168 124h15M215 126h14M216 151h13" /></g>
+              <path class="line life" d="M110 180c-34 24-42 71-14 101 15 17 38 21 61 17" /><path class="line head" d="M90 211c38-12 83-11 124 6" /><path class="line heart" d="M95 162c32 14 69 12 109-7" /><path class="line fate" d="M160 297c-8-48-4-91 9-132" /><path class="line accent" d="M118 244c27-4 52 1 78 14" />
             </svg>
             <div class="scan-beam"></div>
           </div>
-
-          <div class="mobile-report-card">
-            <p>CYBERPALM | AI PALM SCAN</p>
-            <div class="report-line-compact">
-              <span>Life Line: <strong>88%</strong></span>
-              <span>Head Line: <strong>74%</strong></span>
-              <span>Heart Line: <strong>92%</strong></span>
-            </div>
-          </div>
-
-          <div class="status-grid">
-            <span class="status-chip good">촬영 가이드</span>
-            <span class="status-chip good" id="engineModeChip">브라우저 분석</span>
-          </div>
-          <div class="capture-guide" id="captureGuide">
-            <strong id="captureGuideTitle">왼손 촬영 준비</strong>
-            <p id="captureGuideText">손바닥 전체가 화면 중앙에 들어오고 손금이 보이도록 밝은 곳에서 촬영해 주세요.</p>
-          </div>
-
+          <div class="mobile-report-card"><p>CYBERPALM | AI PALM SCAN</p><div class="report-line-compact"><span>Life Line: <strong>88%</strong></span><span>Head Line: <strong>74%</strong></span><span>Heart Line: <strong>92%</strong></span></div></div>
+          <div class="status-grid"><span class="status-chip good">촬영 가이드</span><span class="status-chip good" id="engineModeChip">브라우저 분석</span></div>
+          <div class="capture-guide" id="captureGuide"><strong id="captureGuideTitle">왼손 촬영 준비</strong><p id="captureGuideText">손바닥 전체가 화면 중앙에 들어오고 손금이 잘 보이도록 밝은 곳에서 촬영해 주세요.</p></div>
           <div class="preview-strip">
-            <div class="preview-item" id="leftPreviewItem">
-              <div class="preview-thumb"><img id="leftMobileThumb" alt="왼손 미리보기" /></div>
-              <div>
-                <span>왼손</span>
-                <strong id="leftPreviewText">대기</strong>
-                <em id="leftQualityText">품질 대기</em>
-              </div>
-              <button type="button" data-retake-hand="left">다시 선택</button>
-            </div>
-            <div class="preview-item" id="rightPreviewItem">
-              <div class="preview-thumb"><img id="rightMobileThumb" alt="오른손 미리보기" /></div>
-              <div>
-                <span>오른손</span>
-                <strong id="rightPreviewText">대기</strong>
-                <em id="rightQualityText">품질 대기</em>
-              </div>
-              <button type="button" data-retake-hand="right">다시 선택</button>
-            </div>
+            <div class="preview-item" id="leftPreviewItem"><div class="preview-thumb"><img id="leftMobileThumb" alt="왼손 미리보기" /></div><div><span>왼손</span><strong id="leftPreviewText">대기</strong><em id="leftQualityText">품질 대기</em></div><button type="button" data-retake-hand="left">다시 선택</button></div>
+            <div class="preview-item" id="rightPreviewItem"><div class="preview-thumb"><img id="rightMobileThumb" alt="오른손 미리보기" /></div><div><span>오른손</span><strong id="rightPreviewText">대기</strong><em id="rightQualityText">품질 대기</em></div><button type="button" data-retake-hand="right">다시 선택</button></div>
           </div>
-
           <p class="ready-note" id="readyNote">왼손부터 촬영하거나 갤러리에서 선택해 주세요.</p>
-
-          <div class="capture-actions">
-            <button class="primary-button step-button left-capture" id="leftCaptureButton" type="button">왼손 촬영하기</button>
-            <button class="secondary-button step-button right-capture" id="rightCaptureButton" type="button">오른손 촬영하기</button>
-          </div>
-
+          <div class="capture-actions"><button class="primary-button step-button left-capture" id="leftCaptureButton" type="button">왼손 촬영하기</button><button class="secondary-button step-button right-capture" id="rightCaptureButton" type="button">오른손 촬영하기</button></div>
           <button class="wide-button step-button analyze-capture" id="analyzeMobile" type="button">양손 분석 시작</button>
-          <input id="leftCameraInputMobile" type="file" accept="image/*" capture="environment" />
-          <input id="leftGalleryInputMobile" type="file" accept="image/*" />
-          <input id="rightCameraInputMobile" type="file" accept="image/*" capture="environment" />
-          <input id="rightGalleryInputMobile" type="file" accept="image/*" />
+          <input id="leftCameraInputMobile" type="file" accept="image/*" capture="environment" /><input id="leftGalleryInputMobile" type="file" accept="image/*" /><input id="rightCameraInputMobile" type="file" accept="image/*" capture="environment" /><input id="rightGalleryInputMobile" type="file" accept="image/*" />
         </div>
-
-        <div class="phone-frame scan-screen" aria-live="polite">
-          <div class="scan-header">
-            <span>CYBERPALM SCAN</span>
-            <strong id="scanProgressText">0%</strong>
-          </div>
-
-          <div class="scan-stage scan-stage-focused" aria-label="손금 분석 진행 화면">
-            <div class="scan-grid"></div>
-            <div class="scan-ring"></div>
-            <div class="cyberpalm-title">CYBERPALM</div>
-            <img class="cyber-hand-art" src="./assets/cyberpalm-hand.png" alt="CYBERPALM 손금 스캔 이미지" />
-            <div class="scan-beam"></div>
-          </div>
-
-          <div class="scan-progress-panel">
-            <p id="scanPhase">이미지 전처리 중</p>
-            <div class="scan-progress-track">
-              <span id="scanProgressBar"></span>
-            </div>
-            <ol class="mobile-scan-steps">
-              <li class="active" data-scan-step="1">Image Input</li>
-              <li data-scan-step="2">Preprocessing</li>
-              <li data-scan-step="3">Line Detection</li>
-              <li data-scan-step="4">Interpretation</li>
-            </ol>
-          </div>
-        </div>
-
-        <div class="phone-frame result-screen">
-          <div class="scan-header">
-            <span>분석 결과</span>
-            <strong id="mobileResultScore">--</strong>
-          </div>
-
-          <div class="result-summary">
-            <p>CYBERPALM | AI PALM SCAN</p>
-            <h2>양손 이미지 분석 완료</h2>
-            <div class="result-score-grid">
-              <div><span>Life Line</span><strong id="mobileLifeScore">--</strong><small id="lifeBasis">--</small></div>
-              <div><span>Head Line</span><strong id="mobileHeadScore">--</strong><small id="headBasis">--</small></div>
-              <div><span>Heart Line</span><strong id="mobileHeartScore">--</strong><small id="heartBasis">--</small></div>
-              <div><span>Fate Line</span><strong id="mobileFateScore">--</strong><small id="fateBasis">--</small></div>
-            </div>
-            <div class="quality-summary">
-              <span>이미지 품질</span>
-              <strong id="resultQualityText">--</strong>
-            </div>
-            <div class="engine-summary">
-              <span>분석 방식</span>
-              <strong id="analysisEngineText">브라우저 분석</strong>
-            </div>
-            <div class="analysis-advice" id="analysisAdvice">
-              <strong id="analysisAdviceTitle">분석 기준 확인 중</strong>
-              <p id="analysisAdviceText">양손 사진의 밝기, 선명도, 손금 후보선을 함께 확인합니다.</p>
-            </div>
-
-            <div class="hand-compare">
-              <div>
-                <span>왼손</span>
-                <strong>타고난 성향</strong>
-                <p id="leftInsight">직관적 판단과 안정적인 생활 리듬이 강하게 나타납니다.</p>
-              </div>
-              <div>
-                <span>오른손</span>
-                <strong>현재 패턴</strong>
-                <p id="rightInsight">최근에는 실행력과 관계 균형을 함께 조정하는 흐름입니다.</p>
-              </div>
-            </div>
-
-            <div class="interpretation-cards">
-              <article>
-                <span>성향</span>
-                <p id="personalityInsight">직관과 분석을 함께 쓰는 균형형 타입입니다.</p>
-              </article>
-              <article>
-                <span>감정</span>
-                <p id="emotionInsight">감정 표현은 깊지만, 중요한 관계에서는 신중하게 움직입니다.</p>
-              </article>
-              <article>
-                <span>사고</span>
-                <p id="thinkingInsight">빠른 결정보다는 검토 후 실행하는 안정형 사고가 강합니다.</p>
-              </article>
-              <article>
-                <span>관계</span>
-                <p id="relationInsight">가까운 관계에 몰입하고, 신뢰가 쌓이면 오래 유지하는 편입니다.</p>
-              </article>
-            </div>
-            <div class="detail-report">
-              <article>
-                <span>핵심 요약</span>
-                <p id="summaryReport">양손의 주요 흐름을 바탕으로 현재 성향과 리듬을 요약합니다.</p>
-              </article>
-              <article>
-                <span>현재 흐름</span>
-                <p id="currentReport">최근의 선택과 실행 흐름을 참고용으로 해석합니다.</p>
-              </article>
-              <article>
-                <span>감정과 관계</span>
-                <p id="emotionReport">감정 표현과 관계 패턴을 함께 살펴봅니다.</p>
-              </article>
-              <article>
-                <span>오늘의 조언</span>
-                <p id="adviceReport">결과를 자기성찰용 힌트로 가볍게 활용해 주세요.</p>
-              </article>
-            </div>
-            <p class="result-note">결과는 엔터테인먼트 및 자기성찰 목적의 참고 리포트입니다.</p>
-          </div>
-
-          <div class="result-actions">
-            <button class="primary-button" id="restartCaptureButton" type="button">이미지 변경</button>
-            <button class="secondary-button" id="reanalyzeButton" type="button">다시 분석</button>
-            <button class="secondary-button result-share-button" id="shareCardButton" type="button">결과 이미지 공유</button>
-            <button class="secondary-button result-deep-button" id="perspicaciousButton" type="button">Perspicacious Analysis</button>
-          </div>
-        </div>
-
-        <div class="phone-frame deep-screen">
-          <div class="scan-header">
-            <span>Perspicacious Analysis</span>
-            <strong id="deepResultScore">--</strong>
-          </div>
-
-          <div class="result-summary">
-            <p>CYBERPALM | PRIVATE INSIGHT</p>
-            <h2>심층 성향 리포트</h2>
-            <div class="deep-report">
-              <article>
-                <span>이상형 성향</span>
-                <p id="idealTypeInsight">상대에게 기대하는 정서적 안정감과 끌림의 방향을 해석합니다.</p>
-              </article>
-              <article>
-                <span>연애 성향</span>
-                <p id="romanceInsight">관계가 시작되고 깊어질 때의 속도와 표현 방식을 살펴봅니다.</p>
-              </article>
-              <article>
-                <span>애정 성향</span>
-                <p id="affectionInsight">애정을 주고받는 방식과 친밀감의 리듬을 참고용으로 해석합니다.</p>
-              </article>
-              <article>
-                <span>성적 성향</span>
-                <p id="intimacyInsight">성적인 표현이 아니라 친밀감, 신뢰, 거리감의 흐름을 중심으로 해석합니다.</p>
-              </article>
-            </div>
-            <p class="result-note">이 내용은 성인용 엔터테인먼트 및 자기성찰 목적의 참고 리포트입니다.</p>
-          </div>
-
-          <div class="result-actions">
-            <button class="primary-button" id="deepBackButton" type="button">결과로 돌아가기</button>
-            <button class="secondary-button result-share-button" id="deepShareButton" type="button">결과 이미지 공유</button>
-          </div>
-        </div>
+        <div class="phone-frame scan-screen" aria-live="polite"><div class="scan-header"><span>CYBERPALM SCAN</span><strong id="scanProgressText">0%</strong></div><div class="scan-stage scan-stage-focused" aria-label="손금 분석 진행 화면"><div class="scan-grid"></div><div class="scan-ring"></div><div class="cyberpalm-title">CYBERPALM</div><img class="cyber-hand-art" src="./assets/cyberpalm-hand.png" alt="CYBERPALM 손금 스캔 이미지" /><div class="scan-beam"></div></div><div class="scan-progress-panel"><p id="scanPhase">이미지 전처리 중</p><div class="scan-progress-track"><span id="scanProgressBar"></span></div><ol class="mobile-scan-steps"><li class="active" data-scan-step="1">Image Input</li><li data-scan-step="2">Preprocessing</li><li data-scan-step="3">Line Detection</li><li data-scan-step="4">Interpretation</li></ol></div></div>
+        <div class="phone-frame result-screen"><div class="scan-header"><span>분석 결과</span><strong id="mobileResultScore">--</strong></div><div class="result-summary"><p>CYBERPALM | AI PALM SCAN</p><h2>양손 이미지 분석 완료</h2><div class="result-score-grid"><div><span>Life Line</span><strong id="mobileLifeScore">--</strong><small id="lifeBasis">--</small></div><div><span>Head Line</span><strong id="mobileHeadScore">--</strong><small id="headBasis">--</small></div><div><span>Heart Line</span><strong id="mobileHeartScore">--</strong><small id="heartBasis">--</small></div><div><span>Fate Line</span><strong id="mobileFateScore">--</strong><small id="fateBasis">--</small></div></div><div class="quality-summary"><span>이미지 품질</span><strong id="resultQualityText">--</strong></div><div class="engine-summary"><span>분석 방식</span><strong id="analysisEngineText">브라우저 분석</strong></div><div class="analysis-advice" id="analysisAdvice"><strong id="analysisAdviceTitle">분석 기준 확인 중</strong><p id="analysisAdviceText">양손 사진의 밝기, 선명도, 손금 후보선을 함께 확인합니다.</p></div><div class="hand-compare"><div><span>왼손</span><strong>타고난 성향</strong><p id="leftInsight">직관과 판단의 균형을 참고합니다.</p></div><div><span>오른손</span><strong>현재 패턴</strong><p id="rightInsight">최근의 실행력과 관계 흐름을 참고합니다.</p></div></div><div class="interpretation-cards"><article><span>성향</span><p id="personalityInsight">직관과 분석이 함께 움직이는 균형형 타입입니다.</p></article><article><span>감정</span><p id="emotionInsight">감정 표현은 깊지만 관계에서는 신중하게 움직입니다.</p></article><article><span>사고</span><p id="thinkingInsight">빠른 결정보다는 검토 후 실행하는 사고 흐름입니다.</p></article><article><span>관계</span><p id="relationInsight">가까운 관계에 몰입하고 신뢰를 중시합니다.</p></article></div><div class="detail-report"><article><span>핵심 요약</span><p id="summaryReport">양손의 주요 흐름을 바탕으로 현재 성향과 리듬을 요약합니다.</p></article><article><span>현재 흐름</span><p id="currentReport">최근 선택과 실행 흐름을 참고해 해석합니다.</p></article><article><span>감정과 관계</span><p id="emotionReport">감정 표현과 관계 패턴을 함께 해석합니다.</p></article><article><span>오늘의 조언</span><p id="adviceReport">결과를 자기성찰 힌트로 가볍게 활용해 주세요.</p></article></div><p class="result-note">결과는 엔터테인먼트 및 자기성찰 목적의 참고 리포트입니다.</p></div><div class="result-actions"><button class="primary-button" id="restartCaptureButton" type="button">이미지 변경</button><button class="secondary-button" id="reanalyzeButton" type="button">다시 분석</button><button class="secondary-button result-share-button" id="shareCardButton" type="button">결과 이미지 공유</button><button class="secondary-button result-deep-button" id="perspicaciousButton" type="button">Perspicacious Analysis</button></div></div>
+        <div class="phone-frame deep-screen"><div class="scan-header"><span>Perspicacious Analysis</span><strong id="deepResultScore">--</strong></div><div class="result-summary"><p>CYBERPALM | PRIVATE INSIGHT</p><h2>심층 성향 리포트</h2><div class="deep-report"><article><span>이상형 성향</span><p id="idealTypeInsight">상대에게 기대하는 정서적 안정감과 끌림의 방향을 해석합니다.</p></article><article><span>연애 성향</span><p id="romanceInsight">관계가 시작되고 깊어질 때의 속도와 표현 방식을 해석합니다.</p></article><article><span>애정 성향</span><p id="affectionInsight">애정을 주고받는 방식과 친밀감의 리듬을 참고합니다.</p></article><article><span>성적 성향</span><p id="intimacyInsight">친밀감, 신뢰, 거리감의 흐름을 중심으로 해석합니다.</p></article></div><p class="result-note">이 내용은 성인용 엔터테인먼트 및 자기성찰 목적의 참고 리포트입니다.</p></div><div class="result-actions"><button class="primary-button" id="deepBackButton" type="button">결과로 돌아가기</button><button class="secondary-button result-share-button" id="deepShareButton" type="button">결과 이미지 공유</button></div></div>
       </section>
-
-      <div class="source-sheet" id="sourceSheet" aria-hidden="true">
-        <div class="source-backdrop" data-close-source></div>
-        <div class="source-panel" role="dialog" aria-modal="true" aria-labelledby="sourceTitle">
-          <div class="source-handle"></div>
-          <p class="eyebrow" id="sourceHandLabel">왼손 이미지</p>
-          <h2 id="sourceTitle">이미지 가져오기</h2>
-          <p class="source-help">촬영은 카메라를 열고, 갤러리는 저장된 손바닥 이미지를 선택합니다.</p>
-          <div class="source-actions">
-            <button class="source-option" id="cameraSourceButton" type="button">
-              <b>CAM</b>
-              <span>카메라로 촬영</span>
-              <small>바로 손바닥을 촬영합니다</small>
-            </button>
-            <button class="source-option" id="gallerySourceButton" type="button">
-              <b>IMG</b>
-              <span>갤러리에서 선택</span>
-              <small>이미 저장된 손바닥 이미지를 사용합니다</small>
-            </button>
-          </div>
-          <button class="source-cancel" type="button" data-close-source>닫기</button>
-        </div>
-      </div>
-
-      <div class="share-sheet" id="shareSheet" aria-hidden="true">
-        <div class="source-backdrop" data-close-share></div>
-        <div class="share-panel" role="dialog" aria-modal="true">
-          <h2>결과 이미지</h2>
-          <p class="source-help">아래 이미지를 길게 눌러 저장하거나 공유하세요.</p>
-          <div class="share-preview-frame">
-            <img id="sharePreviewImage" alt="결과 이미지" />
-          </div>
-          <button class="source-cancel" type="button" data-close-share>닫기</button>
-        </div>
-      </div>
-
-      <section class="disclaimer">
-        본 서비스는 엔터테인먼트 및 자기성찰 목적의 콘텐츠입니다. 건강, 재정, 법률, 직업 등 중요한 의사결정의 근거로 사용하지 마세요.
-      </section>
+      <div class="source-sheet" id="sourceSheet" aria-hidden="true"><div class="source-backdrop" data-close-source></div><div class="source-panel" role="dialog" aria-modal="true" aria-labelledby="sourceTitle"><div class="source-handle"></div><p class="eyebrow" id="sourceHandLabel">왼손 이미지</p><h2 id="sourceTitle">이미지 가져오기</h2><p class="source-help">촬영은 카메라를 열고, 갤러리는 저장된 손바닥 이미지를 선택합니다.</p><div class="source-actions"><button class="source-option" id="cameraSourceButton" type="button"><b>CAM</b><span>카메라로 촬영</span><small>바로 손바닥을 촬영합니다.</small></button><button class="source-option" id="gallerySourceButton" type="button"><b>IMG</b><span>갤러리에서 선택</span><small>이미 저장된 손바닥 이미지를 사용합니다.</small></button></div><button class="source-cancel" type="button" data-close-source>닫기</button></div></div>
+      <div class="share-sheet" id="shareSheet" aria-hidden="true"><div class="source-backdrop" data-close-share></div><div class="share-panel" role="dialog" aria-modal="true"><h2>결과 이미지</h2><p class="source-help">아래 이미지를 길게 눌러 저장하거나 공유하세요.</p><div class="share-preview-frame"><img id="sharePreviewImage" alt="결과 이미지" /></div><button class="source-cancel" type="button" data-close-share>닫기</button></div></div>
+      <section class="disclaimer">본 서비스는 엔터테인먼트 및 자기성찰 목적의 콘텐츠입니다. 건강, 재정, 법률, 직업 등 중요한 의사결정의 근거로 사용하지 마세요.</section>
     </main>
-
     <script src="./app.js"></script>
   </body>
 </html>
