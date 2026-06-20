@@ -1,4 +1,4 @@
-const REQUESTED_ANALYSIS_ENGINE = new URLSearchParams(window.location.search).get("engine");
+﻿const REQUESTED_ANALYSIS_ENGINE = new URLSearchParams(window.location.search).get("engine");
 const CAN_USE_REMOTE_API = ["http:", "https:"].includes(window.location.protocol);
 const ANALYSIS_ENGINE =
   REQUESTED_ANALYSIS_ENGINE === "browser"
@@ -7,8 +7,8 @@ const ANALYSIS_ENGINE =
       ? "api"
       : "browser";
 const API_ANALYSIS_ENDPOINT = "/api/palm-analysis";
-const DEFAULT_ANALYSIS_ENGINE_LABEL = "브라우저 분석";
-const FALLBACK_ANALYSIS_ENGINE_LABEL = "브라우저 분석(대체)";
+const DEFAULT_ANALYSIS_ENGINE_LABEL = "釉뚮씪?곗? 遺꾩꽍";
+const FALLBACK_ANALYSIS_ENGINE_LABEL = "釉뚮씪?곗? 遺꾩꽍(?泥?";
 
 const state = {
   left: null,
@@ -63,7 +63,7 @@ function bindFile(inputId, hand) {
 function openSourceSheet(hand) {
   state.pendingHand = hand;
   state.sourceReturnTarget = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-  updateText("#sourceHandLabel", hand === "left" ? "왼손 이미지" : "오른손 이미지");
+  updateText("#sourceHandLabel", hand === "left" ? "?쇱넀 ?대?吏" : "?ㅻⅨ???대?吏");
   $("#sourceSheet")?.classList.add("open");
   $("#sourceSheet")?.setAttribute("aria-hidden", "false");
   document.body.classList.add("source-open");
@@ -128,8 +128,8 @@ function renderStatuses() {
   $("#rightPreviewItem")?.classList.toggle("ready", rightReady);
   renderQuality("left");
   renderQuality("right");
-  updateText("#leftPreviewText", leftReady ? "선택 완료" : "대기");
-  updateText("#rightPreviewText", rightReady ? "선택 완료" : "대기");
+  updateText("#leftPreviewText", leftReady ? "?좏깮 ?꾨즺" : "?湲?);
+  updateText("#rightPreviewText", rightReady ? "?좏깮 ?꾨즺" : "?湲?);
   if (analyzeButton) {
     analyzeButton.classList.remove("quality-good", "quality-warn", "quality-bad");
     if (overallQuality) analyzeButton.classList.add(`quality-${overallQuality.level}`);
@@ -137,28 +137,28 @@ function renderStatuses() {
     analyzeButton.setAttribute("aria-disabled", String(step !== "analyze" || state.isAnalyzing));
     analyzeButton.textContent =
       state.isAnalyzing
-        ? "분석 진행 중"
+        ? "遺꾩꽍 吏꾪뻾 以?
         : step === "left"
-        ? "왼손 이미지 필요"
+        ? "?쇱넀 ?대?吏 ?꾩슂"
         : step === "right"
-          ? "오른손 이미지 필요"
+          ? "?ㅻⅨ???대?吏 ?꾩슂"
           : overallQuality?.level === "bad"
             ? state.lowQualityConfirmed
-              ? "참고 분석 계속"
-              : "재촬영 권장 확인"
+              ? "李멸퀬 遺꾩꽍 怨꾩냽"
+              : "?ъ눋??沅뚯옣 ?뺤씤"
             : overallQuality?.level === "warn"
-              ? "참고 분석 시작"
-              : "양손 분석 시작";
+              ? "李멸퀬 遺꾩꽍 ?쒖옉"
+              : "?묒넀 遺꾩꽍 ?쒖옉";
   }
   updateText(
     "#readyNote",
     !leftReady
-      ? "왼손부터 촬영하거나 갤러리에서 선택해 주세요."
+      ? "?쇱넀遺??珥ъ쁺?섍굅??媛ㅻ윭由ъ뿉???좏깮??二쇱꽭??"
       : !rightReady
-        ? "왼손이 준비되었습니다. 이제 오른손을 선택해 주세요."
+        ? "?쇱넀??以鍮꾨릺?덉뒿?덈떎. ?댁젣 ?ㅻⅨ?먯쓣 ?좏깮??二쇱꽭??"
         : overallQuality?.level === "bad"
-          ? "이미지 품질이 낮습니다. 다시 선택하거나 참고 분석으로 진행할 수 있습니다."
-          : "양손 이미지가 준비되었습니다. 분석을 시작할 수 있습니다."
+          ? "?대?吏 ?덉쭏????뒿?덈떎. ?ㅼ떆 ?좏깮?섍굅??李멸퀬 遺꾩꽍?쇰줈 吏꾪뻾?????덉뒿?덈떎."
+          : "?묒넀 ?대?吏媛 以鍮꾨릺?덉뒿?덈떎. 遺꾩꽍???쒖옉?????덉뒿?덈떎."
   );
   renderCaptureGuide(leftReady, rightReady);
   document.body.dataset.step = step;
@@ -166,7 +166,7 @@ function renderStatuses() {
 
 function getEngineModeLabel() {
   if (ANALYSIS_ENGINE !== "api") return DEFAULT_ANALYSIS_ENGINE_LABEL;
-  return CAN_USE_REMOTE_API ? "API 분석" : "API는 서버 필요";
+  return CAN_USE_REMOTE_API ? "API 遺꾩꽍" : "API???쒕쾭 ?꾩슂";
 }
 
 function updateEngineModeChip() {
@@ -182,25 +182,25 @@ function renderCaptureGuide(leftReady = Boolean(state.left), rightReady = Boolea
 
   const overall = leftReady && rightReady ? getOverallQuality() : null;
   let level = "warn";
-  let title = "왼손 촬영 준비";
-  let text = "손바닥 전체가 화면 중앙에 들어오고 손금이 보이도록 밝은 곳에서 촬영해 주세요.";
+  let title = "?쇱넀 珥ъ쁺 以鍮?;
+  let text = "?먮컮???꾩껜媛 ?붾㈃ 以묒븰???ㅼ뼱?ㅺ퀬 ?먭툑??蹂댁씠?꾨줉 諛앹? 怨녹뿉??珥ъ쁺??二쇱꽭??";
 
   if (leftReady && !rightReady) {
-    title = "오른손 촬영 준비";
-    text = "왼손과 비슷한 거리와 밝기로 오른손 손바닥을 정면에서 촬영해 주세요.";
+    title = "?ㅻⅨ??珥ъ쁺 以鍮?;
+    text = "?쇱넀怨?鍮꾩듂??嫄곕━? 諛앷린濡??ㅻⅨ???먮컮?μ쓣 ?뺣㈃?먯꽌 珥ъ쁺??二쇱꽭??";
   } else if (leftReady && rightReady && overall?.level === "bad") {
     level = "bad";
-    title = state.lowQualityConfirmed ? "참고 분석 대기" : "이미지 다시 선택 권장";
+    title = state.lowQualityConfirmed ? "李멸퀬 遺꾩꽍 ?湲? : "?대?吏 ?ㅼ떆 ?좏깮 沅뚯옣";
     text = state.lowQualityConfirmed
-      ? "현재 사진으로 참고 분석을 진행하려면 아래 버튼을 한 번 더 눌러 주세요."
-      : "손바닥이 어둡거나 흐리면 분석 신뢰도가 낮아집니다. 밝은 배경에서 다시 촬영해 주세요.";
+      ? "?꾩옱 ?ъ쭊?쇰줈 李멸퀬 遺꾩꽍??吏꾪뻾?섎젮硫??꾨옒 踰꾪듉????踰????뚮윭 二쇱꽭??"
+      : "?먮컮?μ씠 ?대몼嫄곕굹 ?먮━硫?遺꾩꽍 ?좊ː?꾧? ??븘吏묐땲?? 諛앹? 諛곌꼍?먯꽌 ?ㅼ떆 珥ъ쁺??二쇱꽭??";
   } else if (leftReady && rightReady && overall?.level === "warn") {
-    title = "참고 분석 가능";
-    text = "분석은 가능하지만 일부 선명도가 부족합니다. 더 밝게 촬영하면 결과가 안정적입니다.";
+    title = "李멸퀬 遺꾩꽍 媛??;
+    text = "遺꾩꽍? 媛?ν븯吏留??쇰? ?좊챸?꾧? 遺議깊빀?덈떎. ??諛앷쾶 珥ъ쁺?섎㈃ 寃곌낵媛 ?덉젙?곸엯?덈떎.";
   } else if (leftReady && rightReady) {
     level = "good";
-    title = "분석 준비 완료";
-    text = "양손 이미지 품질이 충분합니다. 아래 버튼으로 분석을 시작해 주세요.";
+    title = "遺꾩꽍 以鍮??꾨즺";
+    text = "?묒넀 ?대?吏 ?덉쭏??異⑸텇?⑸땲?? ?꾨옒 踰꾪듉?쇰줈 遺꾩꽍???쒖옉??二쇱꽭??";
   }
 
   guide.classList.remove("good", "warn", "bad");
@@ -219,15 +219,15 @@ function renderQuality(hand) {
   item.classList.remove("quality-good", "quality-warn", "quality-bad");
   item.classList.toggle("hand-mismatch", Boolean(handCheck?.mismatch));
   if (!quality) {
-    text.textContent = "품질 대기";
+    text.textContent = "?덉쭏 ?湲?;
     return;
   }
 
   item.classList.add(`quality-${quality.level}`);
   text.textContent = handCheck?.mismatch
-    ? `${handCheck.message} · ${quality.label} ${quality.total}%`
+    ? `${handCheck.message} 쨌 ${quality.label} ${quality.total}%`
     : handCheck?.needsReview
-      ? `손 방향 확인 필요 · ${quality.label} ${quality.total}%`
+      ? `??諛⑺뼢 ?뺤씤 ?꾩슂 쨌 ${quality.label} ${quality.total}%`
       : `${quality.label} ${quality.total}%`;
 }
 
@@ -319,7 +319,7 @@ async function updateHandCheck(hand) {
     ...detected,
     mismatch,
     needsReview: detected.side === "unknown" || detected.level !== "high",
-    message: mismatch ? `${detected.side === "left" ? "왼손" : "오른손"}처럼 보임` : "",
+    message: mismatch ? `${detected.side === "left" ? "?쇱넀" : "?ㅻⅨ??}泥섎읆 蹂댁엫` : "",
   };
 }
 
@@ -427,7 +427,7 @@ function classifyQuality(metrics) {
   const score = scoreMetrics(metrics);
   const total = clampScore(score.brightness * 0.28 + score.contrast * 0.32 + score.edges * 0.4);
   const level = total >= 58 ? "good" : total >= 38 ? "warn" : "bad";
-  const label = level === "good" ? "품질 양호" : level === "warn" ? "참고 분석" : "재촬영 권장";
+  const label = level === "good" ? "?덉쭏 ?묓샇" : level === "warn" ? "李멸퀬 遺꾩꽍" : "?ъ눋??沅뚯옣";
   return { ...score, total, level, label };
 }
 
@@ -439,10 +439,10 @@ async function updateHandQuality(hand) {
 
 function getOverallQuality() {
   const qualities = [state.quality.left, state.quality.right].filter(Boolean);
-  if (qualities.length < 2) return { level: "warn", label: "품질 확인 중" };
-  if (qualities.some((item) => item.level === "bad")) return { level: "bad", label: "재촬영 권장" };
-  if (qualities.some((item) => item.level === "warn")) return { level: "warn", label: "참고 분석" };
-  return { level: "good", label: "품질 양호" };
+  if (qualities.length < 2) return { level: "warn", label: "?덉쭏 ?뺤씤 以? };
+  if (qualities.some((item) => item.level === "bad")) return { level: "bad", label: "?ъ눋??沅뚯옣" };
+  if (qualities.some((item) => item.level === "warn")) return { level: "warn", label: "李멸퀬 遺꾩꽍" };
+  return { level: "good", label: "?덉쭏 ?묓샇" };
 }
 
 function scoreBand(value) {
@@ -453,32 +453,32 @@ function scoreBand(value) {
 
 function lineBasis(value, areaLabel) {
   const band = scoreBand(value);
-  if (band === "high") return `${areaLabel} 후보선 강함`;
-  if (band === "mid") return `${areaLabel} 후보선 보통`;
-  return `${areaLabel} 후보선 약함`;
+  if (band === "high") return `${areaLabel} ?꾨낫??媛뺥븿`;
+  if (band === "mid") return `${areaLabel} ?꾨낫??蹂댄넻`;
+  return `${areaLabel} ?꾨낫???쏀븿`;
 }
 
 function getAnalysisAdvice(scores, quality) {
   if (quality.level === "bad" || scores.confidence < 38) {
     return {
       level: "bad",
-      title: "재촬영 권장",
-      text: "손바닥 전체가 밝게 보이도록 다시 촬영하면 더 안정적인 해석이 가능합니다.",
+      title: "?ъ눋??沅뚯옣",
+      text: "?먮컮???꾩껜媛 諛앷쾶 蹂댁씠?꾨줉 ?ㅼ떆 珥ъ쁺?섎㈃ ???덉젙?곸씤 ?댁꽍??媛?ν빀?덈떎.",
     };
   }
 
   if (quality.level === "warn" || scores.confidence < 58) {
     return {
       level: "warn",
-      title: "참고 분석",
-      text: "일부 선명도가 부족해 결과는 참고용입니다. 손바닥을 화면 중앙에 두면 점수가 개선됩니다.",
+      title: "李멸퀬 遺꾩꽍",
+      text: "?쇰? ?좊챸?꾧? 遺議깊빐 寃곌낵??李멸퀬?⑹엯?덈떎. ?먮컮?μ쓣 ?붾㈃ 以묒븰???먮㈃ ?먯닔媛 媛쒖꽑?⑸땲??",
     };
   }
 
   return {
     level: "good",
-    title: "분석 조건 양호",
-    text: "밝기와 손금 후보선이 충분히 감지되어 현재 사진 기준으로 해석했습니다.",
+    title: "遺꾩꽍 議곌굔 ?묓샇",
+    text: "諛앷린? ?먭툑 ?꾨낫?좎씠 異⑸텇??媛먯??섏뼱 ?꾩옱 ?ъ쭊 湲곗??쇰줈 ?댁꽍?덉뒿?덈떎.",
   };
 }
 
@@ -487,55 +487,55 @@ function buildInterpretation(scores, quality) {
   const head = scoreBand(scores.head);
   const heart = scoreBand(scores.heart);
   const fate = scoreBand(scores.fate);
-  const qualityPrefix = quality.level === "bad" ? "이미지 품질이 낮아 참고용으로 보면, " : "";
+  const qualityPrefix = quality.level === "bad" ? "?대?吏 ?덉쭏????븘 李멸퀬?⑹쑝濡?蹂대㈃, " : "";
 
   return {
     left:
       life === "high"
-        ? `${qualityPrefix}타고난 에너지와 생활 리듬을 강하게 쓰는 흐름입니다.`
+        ? `${qualityPrefix}?怨좊궃 ?먮꼫吏? ?앺솢 由щ벉??媛뺥븯寃??곕뒗 ?먮쫫?낅땲??`
         : life === "mid"
-          ? `${qualityPrefix}기본 리듬은 안정적이지만 컨디션 변화에 따라 흐름이 달라질 수 있습니다.`
-          : `${qualityPrefix}생활 리듬보다 회복과 정돈이 더 중요한 타입으로 해석됩니다.`,
+          ? `${qualityPrefix}湲곕낯 由щ벉? ?덉젙?곸씠吏留?而⑤뵒??蹂?붿뿉 ?곕씪 ?먮쫫???щ씪吏????덉뒿?덈떎.`
+          : `${qualityPrefix}?앺솢 由щ벉蹂대떎 ?뚮났怨??뺣룉????以묒슂????낆쑝濡??댁꽍?⑸땲??`,
     right:
       fate === "high"
-        ? "현재는 목표를 향해 밀고 가는 실행 패턴이 비교적 뚜렷합니다."
+        ? "?꾩옱??紐⑺몴瑜??ν빐 諛怨?媛???ㅽ뻾 ?⑦꽩??鍮꾧탳???쒕졆?⑸땲??"
         : fate === "mid"
-          ? "현재 패턴은 유연하게 조정하며 방향을 잡아가는 쪽에 가깝습니다."
-          : "현재는 한 방향으로 몰아가기보다 선택지를 넓게 보는 흐름입니다.",
+          ? "?꾩옱 ?⑦꽩? ?좎뿰?섍쾶 議곗젙?섎ŉ 諛⑺뼢???≪븘媛??履쎌뿉 媛源앹뒿?덈떎."
+          : "?꾩옱????諛⑺뼢?쇰줈 紐곗븘媛湲곕낫???좏깮吏瑜??볤쾶 蹂대뒗 ?먮쫫?낅땲??",
     personality:
       head === "high"
-        ? "분석과 구조화를 선호하는 계획형 성향이 두드러집니다."
+        ? "遺꾩꽍怨?援ъ“?붾? ?좏샇?섎뒗 怨꾪쉷???깊뼢???먮뱶?ъ쭛?덈떎."
         : head === "mid"
-          ? "직관과 현실 판단을 함께 쓰는 균형형 성향입니다."
-          : "즉흥적 감각과 상황 적응력이 더 앞서는 성향으로 보입니다.",
+          ? "吏곴?怨??꾩떎 ?먮떒???④퍡 ?곕뒗 洹좏삎???깊뼢?낅땲??"
+          : "利됲씎??媛먭컖怨??곹솴 ?곸쓳?μ씠 ???욎꽌???깊뼢?쇰줈 蹂댁엯?덈떎.",
     emotion:
       heart === "high"
-        ? "감정선 흐름이 뚜렷해 관계에서 표현력과 공감 신호가 강하게 읽힙니다."
+        ? "媛먯젙???먮쫫???쒕졆??愿怨꾩뿉???쒗쁽?κ낵 怨듦컧 ?좏샇媛 媛뺥븯寃??쏀옓?덈떎."
         : heart === "mid"
-          ? "감정 표현은 안정적이지만, 중요한 관계에서는 속도를 조절하는 편입니다."
-          : "감정을 바로 드러내기보다 관찰 후 반응하는 신중한 패턴입니다.",
+          ? "媛먯젙 ?쒗쁽? ?덉젙?곸씠吏留? 以묒슂??愿怨꾩뿉?쒕뒗 ?띾룄瑜?議곗젅?섎뒗 ?몄엯?덈떎."
+          : "媛먯젙??諛붾줈 ?쒕윭?닿린蹂대떎 愿李???諛섏쓳?섎뒗 ?좎쨷???⑦꽩?낅땲??",
     thinking:
       head === "high"
-        ? "문제를 빠르게 분해하고 근거를 찾아 판단하는 방식에 강점이 있습니다."
+        ? "臾몄젣瑜?鍮좊Ⅴ寃?遺꾪빐?섍퀬 洹쇨굅瑜?李얠븘 ?먮떒?섎뒗 諛⑹떇??媛뺤젏???덉뒿?덈떎."
         : head === "mid"
-          ? "큰 방향을 먼저 잡고 필요한 만큼 세부를 점검하는 사고 흐름입니다."
-          : "정답을 고정하기보다 분위기와 맥락을 읽으며 움직이는 쪽입니다.",
+          ? "??諛⑺뼢??癒쇱? ?↔퀬 ?꾩슂??留뚰겮 ?몃?瑜??먭??섎뒗 ?ш퀬 ?먮쫫?낅땲??"
+          : "?뺣떟??怨좎젙?섍린蹂대떎 遺꾩쐞湲곗? 留λ씫???쎌쑝硫??吏곸씠??履쎌엯?덈떎.",
     relation:
       heart === "high" && life !== "low"
-        ? "가까운 관계에 깊게 몰입하고 꾸준히 유지하려는 힘이 있습니다."
+        ? "媛源뚯슫 愿怨꾩뿉 源딄쾶 紐곗엯?섍퀬 袁몄????좎??섎젮???섏씠 ?덉뒿?덈떎."
         : heart === "low"
-          ? "관계에서는 속도보다 신뢰 축적을 우선하는 거리 조절형입니다."
-          : "관계의 균형을 보며 필요한 만큼 표현하는 안정형 패턴입니다.",
+          ? "愿怨꾩뿉?쒕뒗 ?띾룄蹂대떎 ?좊ː 異뺤쟻???곗꽑?섎뒗 嫄곕━ 議곗젅?뺤엯?덈떎."
+          : "愿怨꾩쓽 洹좏삎??蹂대ŉ ?꾩슂??留뚰겮 ?쒗쁽?섎뒗 ?덉젙???⑦꽩?낅땲??",
   };
 }
 
 function buildDetailedReport(scores, quality, interpretation, advice) {
   const confidenceText =
     scores.confidence >= 72
-      ? "사진 조건과 손금 후보선이 비교적 또렷해 해석 흐름이 안정적으로 잡혔습니다."
+      ? "?ъ쭊 議곌굔怨??먭툑 ?꾨낫?좎씠 鍮꾧탳???먮졆???댁꽍 ?먮쫫???덉젙?곸쑝濡??≫삍?듬땲??"
       : scores.confidence >= 45
-        ? "사진에서 손금 후보선은 감지되지만 일부 영역은 참고 수준으로 보는 것이 좋습니다."
-        : "사진 품질이 낮아 결과는 가벼운 참고용으로만 보는 것이 좋습니다.";
+        ? "?ъ쭊?먯꽌 ?먭툑 ?꾨낫?좎? 媛먯??섏?留??쇰? ?곸뿭? 李멸퀬 ?섏??쇰줈 蹂대뒗 寃껋씠 醫뗭뒿?덈떎."
+        : "?ъ쭊 ?덉쭏????븘 寃곌낵??媛踰쇱슫 李멸퀬?⑹쑝濡쒕쭔 蹂대뒗 寃껋씠 醫뗭뒿?덈떎.";
   const dominantLine = [
     ["Life Line", scores.life],
     ["Head Line", scores.head],
@@ -544,10 +544,10 @@ function buildDetailedReport(scores, quality, interpretation, advice) {
   ].sort((a, b) => b[1] - a[1])[0];
 
   return {
-    summary: `${confidenceText} 가장 강하게 잡힌 흐름은 ${dominantLine[0]}이며, 전체 리포트는 엔터테인먼트용 자기성찰 힌트입니다.`,
-    current: `${interpretation.right} ${advice.level === "bad" ? "다만 재촬영 후 다시 확인하면 더 안정적인 흐름을 볼 수 있습니다." : "지금은 방향을 넓게 보되 실행 순서를 정리하는 쪽이 어울립니다."}`,
+    summary: `${confidenceText} 媛??媛뺥븯寃??≫엺 ?먮쫫? ${dominantLine[0]}?대ŉ, ?꾩껜 由ы룷?몃뒗 ?뷀꽣?뚯씤癒쇳듃???먭린?깆같 ?뚰듃?낅땲??`,
+    current: `${interpretation.right} ${advice.level === "bad" ? "?ㅻ쭔 ?ъ눋?????ㅼ떆 ?뺤씤?섎㈃ ???덉젙?곸씤 ?먮쫫??蹂????덉뒿?덈떎." : "吏湲덉? 諛⑺뼢???볤쾶 蹂대릺 ?ㅽ뻾 ?쒖꽌瑜??뺣━?섎뒗 履쎌씠 ?댁슱由쎈땲??"}`,
     emotion: `${interpretation.emotion} ${interpretation.relation}`,
-    advice: `${advice.text} 점수는 좋고 나쁨의 판정이 아니라 사진에서 감지된 선명도와 후보선의 강도를 바탕으로 한 참고 지표입니다.`,
+    advice: `${advice.text} ?먯닔??醫뗪퀬 ?섏겏???먯젙???꾨땲???ъ쭊?먯꽌 媛먯????좊챸?꾩? ?꾨낫?좎쓽 媛뺣룄瑜?諛뷀깢?쇰줈 ??李멸퀬 吏?쒖엯?덈떎.`,
   };
 }
 
@@ -560,22 +560,22 @@ function buildPerspicaciousReport(scores, interpretation) {
   return {
     ideal:
       heartHigh && headHigh
-        ? "이상형은 감정적으로 따뜻하면서도 대화의 결이 잘 맞는 사람에게 끌리는 편입니다. 단순한 호감보다 신뢰, 말의 온도, 생각의 균형을 중요하게 보는 흐름입니다."
+        ? "?댁긽?뺤? 媛먯젙?곸쑝濡??곕쑜?섎㈃?쒕룄 ??붿쓽 寃곗씠 ??留욌뒗 ?щ엺?먭쾶 ?뚮━???몄엯?덈떎. ?⑥닚???멸컧蹂대떎 ?좊ː, 留먯쓽 ?⑤룄, ?앷컖??洹좏삎??以묒슂?섍쾶 蹂대뒗 ?먮쫫?낅땲??"
         : heartHigh
-          ? "정서적으로 안정감을 주고 애정 표현이 자연스러운 사람에게 끌릴 가능성이 큽니다. 관계에서 다정함과 진심이 오래 남는 타입입니다."
-          : "처음부터 강하게 몰입하기보다 편안하게 거리를 좁혀가는 사람에게 호감을 느끼는 흐름입니다. 부담 없는 안정감이 이상형의 중요한 조건입니다.",
+          ? "?뺤꽌?곸쑝濡??덉젙媛먯쓣 二쇨퀬 ?좎젙 ?쒗쁽???먯뿰?ㅻ윭???щ엺?먭쾶 ?뚮┫ 媛?μ꽦???쎈땲?? 愿怨꾩뿉???ㅼ젙?④낵 吏꾩떖???ㅻ옒 ?⑤뒗 ??낆엯?덈떎."
+          : "泥섏쓬遺??媛뺥븯寃?紐곗엯?섍린蹂대떎 ?몄븞?섍쾶 嫄곕━瑜?醫곹?媛???щ엺?먭쾶 ?멸컧???먮겮???먮쫫?낅땲?? 遺???녿뒗 ?덉젙媛먯씠 ?댁긽?뺤쓽 以묒슂??議곌굔?낅땲??",
     romance:
       fateHigh
-        ? "연애에서는 방향이 정해지면 꽤 책임감 있게 관계를 이끌어가려는 편입니다. 다만 스스로 확신이 생기기 전까지는 관찰 시간이 필요합니다."
-        : "연애는 빠른 결정보다 분위기와 상호 반응을 보며 천천히 깊어지는 쪽에 가깝습니다. 상대의 태도 변화에 민감하게 반응하는 면도 있습니다.",
+        ? "?곗븷?먯꽌??諛⑺뼢???뺥빐吏硫?苑?梨낆엫媛??덇쾶 愿怨꾨? ?대걣?닿??ㅻ뒗 ?몄엯?덈떎. ?ㅻ쭔 ?ㅼ뒪濡??뺤떊???앷린湲??꾧퉴吏??愿李??쒓컙???꾩슂?⑸땲??"
+        : "?곗븷??鍮좊Ⅸ 寃곗젙蹂대떎 遺꾩쐞湲곗? ?곹샇 諛섏쓳??蹂대ŉ 泥쒖쿇??源딆뼱吏??履쎌뿉 媛源앹뒿?덈떎. ?곷????쒕룄 蹂?붿뿉 誘쇨컧?섍쾶 諛섏쓳?섎뒗 硫대룄 ?덉뒿?덈떎.",
     affection:
       lifeHigh
-        ? "애정 표현은 생활 속에서 챙겨주고 함께 시간을 쌓는 방식으로 드러나기 쉽습니다. 말보다 행동으로 안정감을 주는 타입에 가깝습니다."
-        : "애정은 깊지만 표현 속도는 신중할 수 있습니다. 마음이 열리기 전에는 조심스럽지만, 신뢰가 생기면 꾸준히 관계를 유지하려는 흐름입니다.",
+        ? "?좎젙 ?쒗쁽? ?앺솢 ?띿뿉??梨숆꺼二쇨퀬 ?④퍡 ?쒓컙???볥뒗 諛⑹떇?쇰줈 ?쒕윭?섍린 ?쎌뒿?덈떎. 留먮낫???됰룞?쇰줈 ?덉젙媛먯쓣 二쇰뒗 ??낆뿉 媛源앹뒿?덈떎."
+        : "?좎젙? 源딆?留??쒗쁽 ?띾룄???좎쨷?????덉뒿?덈떎. 留덉쓬???대━湲??꾩뿉??議곗떖?ㅻ읇吏留? ?좊ː媛 ?앷린硫?袁몄???愿怨꾨? ?좎??섎젮???먮쫫?낅땲??",
     intimacy:
       headHigh
-        ? "친밀감에서는 감정의 속도보다 신뢰와 심리적 안정감을 먼저 확인하려는 경향이 있습니다. 가까워질수록 대화와 배려가 중요한 기준이 됩니다."
-        : "친밀감은 분위기와 감정 교류에 영향을 많이 받는 흐름입니다. 즉흥적인 끌림보다 서로 편안하다고 느끼는 순간에 자연스럽게 깊어지는 타입입니다.",
+        ? "移쒕?媛먯뿉?쒕뒗 媛먯젙???띾룄蹂대떎 ?좊ː? ?щ━???덉젙媛먯쓣 癒쇱? ?뺤씤?섎젮??寃쏀뼢???덉뒿?덈떎. 媛源뚯썙吏덉닔濡???붿? 諛곕젮媛 以묒슂??湲곗????⑸땲??"
+        : "移쒕?媛먯? 遺꾩쐞湲곗? 媛먯젙 援먮쪟???곹뼢??留롮씠 諛쏅뒗 ?먮쫫?낅땲?? 利됲씎?곸씤 ?뚮┝蹂대떎 ?쒕줈 ?몄븞?섎떎怨??먮겮???쒓컙???먯뿰?ㅻ읇寃?源딆뼱吏????낆엯?덈떎.",
   };
 }
 
@@ -628,7 +628,7 @@ function normalizeAnalysisResult(result, fallbackQuality) {
     heart: clampScore(result?.scores?.heart ?? result?.heart ?? 0),
     fate: clampScore(result?.scores?.fate ?? result?.fate ?? 0),
   };
-  const fallback = createAnalysisResult(scores, fallbackQuality, result?.engineLabel || "AI 분석");
+  const fallback = createAnalysisResult(scores, fallbackQuality, result?.engineLabel || "AI 遺꾩꽍");
 
   return {
     engineLabel: result?.engineLabel || fallback.engineLabel,
@@ -689,8 +689,8 @@ function analyze() {
   if (state.isAnalyzing) return;
 
   if (!state.left || !state.right) {
-    const nextStep = !state.left ? "왼손" : "오른손";
-    updateText("#mobileProgress", `${nextStep} 필요`);
+    const nextStep = !state.left ? "?쇱넀" : "?ㅻⅨ??;
+    updateText("#mobileProgress", `${nextStep} ?꾩슂`);
     document.body.dataset.step = !state.left ? "left" : "right";
     return;
   }
@@ -699,7 +699,7 @@ function analyze() {
   if (overallQuality.level === "bad" && !state.lowQualityConfirmed) {
     state.lowQualityConfirmed = true;
     renderStatuses();
-    updateText("#readyNote", "재촬영을 권장합니다. 그래도 진행하려면 분석 버튼을 한 번 더 눌러 주세요.");
+    updateText("#readyNote", "?ъ눋?곸쓣 沅뚯옣?⑸땲?? 洹몃옒??吏꾪뻾?섎젮硫?遺꾩꽍 踰꾪듉????踰????뚮윭 二쇱꽭??");
     return;
   }
 
@@ -707,19 +707,19 @@ function analyze() {
   document.body.classList.add("analyzing");
   renderStatuses();
   setFlow("scanning");
-  setScanProgress(18, "손바닥 영역 추출 중", 2);
+  setScanProgress(18, "?먮컮???곸뿭 異붿텧 以?, 2);
   setPipeline(2);
   updateText("#mobileProgress", "42%");
 
   setTimeout(() => {
     setPipeline(3);
     updateText("#mobileProgress", "78%");
-    setScanProgress(58, "손금 후보선 탐색 중", 3);
+    setScanProgress(58, "?먭툑 ?꾨낫???먯깋 以?, 3);
   }, 650);
 
   setTimeout(async () => {
     try {
-      setScanProgress(82, "이미지 특징 계산 중", 3);
+      setScanProgress(82, "?대?吏 ?뱀쭠 怨꾩궛 以?, 3);
       const result = await runPalmAnalysis();
       state.analysisResult = result;
       state.scores = result.scores;
@@ -727,7 +727,7 @@ function analyze() {
       renderResults();
       setPipeline(4);
       updateText("#mobileProgress", `${state.scores.confidence}%`);
-      setScanProgress(100, "해석 리포트 생성 완료", 4);
+      setScanProgress(100, "?댁꽍 由ы룷???앹꽦 ?꾨즺", 4);
       setTimeout(() => setFlow("result"), 520);
     } finally {
       document.body.classList.remove("analyzing");
@@ -753,10 +753,10 @@ function renderResults() {
   updateText("#mobileHeadScore", `${scores.head}%`);
   updateText("#mobileFateScore", `${scores.fate}%`);
   updateText("#analysisEngineText", analysis.engineLabel || DEFAULT_ANALYSIS_ENGINE_LABEL);
-  updateText("#lifeBasis", lineBasis(scores.life, "좌하단"));
-  updateText("#headBasis", lineBasis(scores.head, "중앙 가로"));
-  updateText("#heartBasis", lineBasis(scores.heart, "상단 가로"));
-  updateText("#fateBasis", lineBasis(scores.fate, "중앙 세로"));
+  updateText("#lifeBasis", lineBasis(scores.life, "醫뚰븯??));
+  updateText("#headBasis", lineBasis(scores.head, "以묒븰 媛濡?));
+  updateText("#heartBasis", lineBasis(scores.heart, "?곷떒 媛濡?));
+  updateText("#fateBasis", lineBasis(scores.fate, "以묒븰 ?몃줈"));
   updateText("#resultQualityText", quality.label);
   const summary = $(".quality-summary");
   summary?.classList.remove("good", "warn", "bad");
@@ -766,7 +766,7 @@ function renderResults() {
   resultScreen?.classList.add(`quality-${quality.level}`);
   const restartButton = $("#restartCaptureButton");
   if (restartButton) {
-    restartButton.textContent = quality.level === "bad" ? "다시 촬영하기" : "이미지 변경";
+    restartButton.textContent = quality.level === "bad" ? "?ㅼ떆 珥ъ쁺?섍린" : "?대?吏 蹂寃?;
   }
   const adviceBox = $("#analysisAdvice");
   adviceBox?.classList.remove("good", "warn", "bad");
@@ -867,10 +867,11 @@ function drawWrappedText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 3) {
 
 function setShareBusy(isBusy) {
   state.isSharing = isBusy;
-  const button = $("#shareCardButton");
-  if (!button) return;
-  button.disabled = isBusy;
-  button.textContent = isBusy ? "이미지 생성 중" : "결과 이미지 공유";
+  const buttons = [$("#shareCardButton"), $("#deepShareButton")].filter(Boolean);
+  buttons.forEach((button) => {
+    button.disabled = isBusy;
+    button.textContent = isBusy ? "이미지 생성 중" : "결과 이미지 공유";
+  });
 }
 
 async function shareOrDownloadCard(blob, scores) {
@@ -883,10 +884,8 @@ function openSharePreview(blob) {
   state.shareBlob = blob;
   state.shareUrl = URL.createObjectURL(blob);
   const previewImage = $("#sharePreviewImage");
-  const openLink = $("#openShareImageLink");
   const downloadLink = $("#downloadShareImageLink");
   if (previewImage) previewImage.src = state.shareUrl;
-  if (openLink) openLink.href = state.shareUrl;
   if (downloadLink) downloadLink.href = state.shareUrl;
   $("#shareSheet")?.classList.add("open");
   $("#shareSheet")?.setAttribute("aria-hidden", "false");
@@ -895,6 +894,7 @@ function openSharePreview(blob) {
 
 function closeSharePreview() {
   $("#shareSheet")?.classList.remove("open");
+  $("#shareSheet")?.classList.remove("expanded");
   $("#shareSheet")?.setAttribute("aria-hidden", "true");
   document.body.classList.remove("share-open");
 }
@@ -918,38 +918,12 @@ async function nativeSharePreparedImage() {
     return;
   }
 
-  $("#openShareImageLink")?.click();
+  $("#sharePreviewImage")?.scrollIntoView({ block: "center" });
 }
 
-async function shareOrDownloadCardLegacy(blob, scores) {
-  const file = new File([blob], "cyberpalm-result.png", { type: "image/png" });
-  const canUseNativeShare =
-    window.isSecureContext &&
-    ["http:", "https:"].includes(window.location.protocol) &&
-    navigator.share &&
-    navigator.canShare?.({ files: [file] });
-
-  if (canUseNativeShare) {
-    await navigator.share({
-      files: [file],
-      title: "Palmistry AI 결과",
-      text: "Palmistry AI 분석 결과 이미지입니다.",
-    });
-    updateText("#mobileResultScore", "공유완료");
-    return;
-  }
-
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "cyberpalm-result.png";
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  URL.revokeObjectURL(url);
-  updateText("#mobileResultScore", "저장완료");
+function expandSharePreview() {
+  $("#shareSheet")?.classList.toggle("expanded");
 }
-
 function canvasToPngBlob(canvas) {
   return Promise.resolve(dataUrlToBlob(canvas.toDataURL("image/png")));
 }
@@ -967,7 +941,7 @@ function dataUrlToBlob(dataUrl) {
 
 function createShareCard(mode = "summary") {
   if (!state.scores) {
-    updateText("#mobileResultScore", "분석필요");
+    updateText("#mobileResultScore", "遺꾩꽍?꾩슂");
     return;
   }
   if (state.isSharing) return;
@@ -1056,11 +1030,11 @@ function createShareCard(mode = "summary") {
   ctx.textAlign = "center";
   ctx.fillStyle = "#ffffff";
   ctx.font = "900 58px Arial, sans-serif";
-  ctx.fillText(`분석 신뢰도 ${scores.confidence}%`, 540, 980);
+  ctx.fillText(`遺꾩꽍 ?좊ː??${scores.confidence}%`, 540, 980);
 
   ctx.fillStyle = quality.level === "bad" ? "#ff7a8a" : quality.level === "warn" ? "#ffd166" : "#49ffb3";
   ctx.font = "900 30px Arial, sans-serif";
-  ctx.fillText(`이미지 품질: ${quality.label}`, 540, 1035);
+  ctx.fillText(`?대?吏 ?덉쭏: ${quality.label}`, 540, 1035);
 
   const scoreItems = [
     ["Life Line", `${scores.life}%`],
@@ -1108,22 +1082,22 @@ function createShareCard(mode = "summary") {
   drawWrappedText(ctx, report.advice, 150, 1660, 780, 34, 2);
 
   const summaryItems = [
-    ["왼손", interpretation.left],
-    ["오른손", interpretation.right],
-    ["성향", interpretation.personality],
-    ["감정", interpretation.emotion],
-    ["사고", interpretation.thinking],
-    ["관계", interpretation.relation],
-    ["핵심 요약", report.summary],
-    ["현재 흐름", report.current],
-    ["감정과 관계", report.emotion],
-    ["오늘의 조언", report.advice],
+    ["?쇱넀", interpretation.left],
+    ["?ㅻⅨ??, interpretation.right],
+    ["?깊뼢", interpretation.personality],
+    ["媛먯젙", interpretation.emotion],
+    ["?ш퀬", interpretation.thinking],
+    ["愿怨?, interpretation.relation],
+    ["?듭떖 ?붿빟", report.summary],
+    ["?꾩옱 ?먮쫫", report.current],
+    ["媛먯젙怨?愿怨?, report.emotion],
+    ["?ㅻ뒛??議곗뼵", report.advice],
   ];
   const deepItems = [
-    ["이상형 성향", deepReport.ideal],
-    ["연애 성향", deepReport.romance],
-    ["애정 성향", deepReport.affection],
-    ["성적 성향", deepReport.intimacy],
+    ["?댁긽???깊뼢", deepReport.ideal],
+    ["?곗븷 ?깊뼢", deepReport.romance],
+    ["?좎젙 ?깊뼢", deepReport.affection],
+    ["?깆쟻 ?깊뼢", deepReport.intimacy],
   ];
   const reportItems = mode === "deep" ? deepItems : summaryItems;
 
@@ -1149,11 +1123,11 @@ function createShareCard(mode = "summary") {
   ctx.textAlign = "center";
   ctx.fillStyle = "#93a8ba";
   ctx.font = "700 24px Arial, sans-serif";
-  ctx.fillText("엔터테인먼트 및 자기성찰 목적의 참고 리포트", 540, reportY + 38);
+  ctx.fillText("?뷀꽣?뚯씤癒쇳듃 諛??먭린?깆같 紐⑹쟻??李멸퀬 由ы룷??, 540, reportY + 38);
 
   canvasToPngBlob(canvas)
     .then((blob) => shareOrDownloadCard(blob, scores))
-    .catch(() => updateText("#mobileResultScore", "공유취소"))
+    .catch(() => updateText("#mobileResultScore", "怨듭쑀痍⑥냼"))
     .finally(() => {
       setShareBusy(false);
       setTimeout(() => updateText("#mobileResultScore", `${scores.confidence}%`), 1200);
@@ -1197,28 +1171,28 @@ function resetApp() {
   updateText("#fateBasis", "--");
   updateText("#resultQualityText", "--");
   updateText("#analysisEngineText", DEFAULT_ANALYSIS_ENGINE_LABEL);
-  updateText("#summaryReport", "양손의 주요 흐름을 바탕으로 현재 성향과 리듬을 요약합니다.");
-  updateText("#currentReport", "최근의 선택과 실행 흐름을 참고용으로 해석합니다.");
-  updateText("#emotionReport", "감정 표현과 관계 패턴을 함께 살펴봅니다.");
-  updateText("#adviceReport", "결과를 자기성찰용 힌트로 가볍게 활용해 주세요.");
+  updateText("#summaryReport", "?묒넀??二쇱슂 ?먮쫫??諛뷀깢?쇰줈 ?꾩옱 ?깊뼢怨?由щ벉???붿빟?⑸땲??");
+  updateText("#currentReport", "理쒓렐???좏깮怨??ㅽ뻾 ?먮쫫??李멸퀬?⑹쑝濡??댁꽍?⑸땲??");
+  updateText("#emotionReport", "媛먯젙 ?쒗쁽怨?愿怨??⑦꽩???④퍡 ?댄렣遊낅땲??");
+  updateText("#adviceReport", "寃곌낵瑜??먭린?깆같???뚰듃濡?媛蹂띻쾶 ?쒖슜??二쇱꽭??");
   updateText("#deepResultScore", "--");
-  updateText("#idealTypeInsight", "상대에게 기대하는 정서적 안정감과 끌림의 방향을 해석합니다.");
-  updateText("#romanceInsight", "관계가 시작되고 깊어질 때의 속도와 표현 방식을 살펴봅니다.");
-  updateText("#affectionInsight", "애정을 주고받는 방식과 친밀감의 리듬을 참고용으로 해석합니다.");
-  updateText("#intimacyInsight", "성적인 표현이 아니라 친밀감, 신뢰, 거리감의 흐름을 중심으로 해석합니다.");
-  updateText("#analysisAdviceTitle", "분석 기준 확인 중");
-  updateText("#analysisAdviceText", "양손 사진의 밝기, 선명도, 손금 후보선을 함께 확인합니다.");
+  updateText("#idealTypeInsight", "?곷??먭쾶 湲곕??섎뒗 ?뺤꽌???덉젙媛먭낵 ?뚮┝??諛⑺뼢???댁꽍?⑸땲??");
+  updateText("#romanceInsight", "愿怨꾧? ?쒖옉?섍퀬 源딆뼱吏??뚯쓽 ?띾룄? ?쒗쁽 諛⑹떇???댄렣遊낅땲??");
+  updateText("#affectionInsight", "?좎젙??二쇨퀬諛쏅뒗 諛⑹떇怨?移쒕?媛먯쓽 由щ벉??李멸퀬?⑹쑝濡??댁꽍?⑸땲??");
+  updateText("#intimacyInsight", "?깆쟻???쒗쁽???꾨땲??移쒕?媛? ?좊ː, 嫄곕━媛먯쓽 ?먮쫫??以묒떖?쇰줈 ?댁꽍?⑸땲??");
+  updateText("#analysisAdviceTitle", "遺꾩꽍 湲곗? ?뺤씤 以?);
+  updateText("#analysisAdviceText", "?묒넀 ?ъ쭊??諛앷린, ?좊챸?? ?먭툑 ?꾨낫?좎쓣 ?④퍡 ?뺤씤?⑸땲??");
   $(".quality-summary")?.classList.remove("good", "warn", "bad");
   $("#analysisAdvice")?.classList.remove("good", "warn", "bad");
   $(".result-screen")?.classList.remove("quality-good", "quality-warn", "quality-bad");
-  updateText("#restartCaptureButton", "이미지 변경");
+  updateText("#restartCaptureButton", "?대?吏 蹂寃?);
   const shareButton = $("#shareCardButton");
   if (shareButton) {
     shareButton.disabled = false;
-    shareButton.textContent = "결과 이미지 공유";
+    shareButton.textContent = "寃곌낵 ?대?吏 怨듭쑀";
   }
   updateText("#perspicaciousButton", "Perspicacious Analysis");
-  setScanProgress(0, "이미지 전처리 중", 1);
+  setScanProgress(0, "?대?吏 ?꾩쿂由?以?, 1);
   setFlow("capture");
   renderStatuses();
   setPipeline(1);
@@ -1235,6 +1209,7 @@ $("#rightCaptureButton")?.addEventListener("click", () => openSourceSheet("right
 $("#cameraSourceButton")?.addEventListener("click", () => triggerSource("camera"));
 $("#gallerySourceButton")?.addEventListener("click", () => triggerSource("gallery"));
 $("#nativeShareButton")?.addEventListener("click", nativeSharePreparedImage);
+$("#openShareImageButton")?.addEventListener("click", expandSharePreview);
 $("#restartCaptureButton")?.addEventListener("click", returnToCapture);
 $("#reanalyzeButton")?.addEventListener("click", analyze);
 $("#shareCardButton")?.addEventListener("click", () => createShareCard("summary"));
@@ -1267,3 +1242,4 @@ document.addEventListener("keydown", (event) => {
 renderStatuses();
 setPipeline(1);
 setFlow("capture");
+

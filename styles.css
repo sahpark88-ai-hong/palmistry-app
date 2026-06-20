@@ -1030,7 +1030,7 @@ body[data-step="right"] .analyze-capture {
   left: 50%;
   bottom: 14px;
   width: min(420px, calc(100% - 24px));
-  max-height: calc(100vh - 28px);
+  max-height: calc(100dvh - 28px);
   padding: 14px;
   overflow: auto;
   transform: translateX(-50%);
@@ -1136,7 +1136,7 @@ body[data-step="right"] .analyze-capture {
 
 .share-preview-frame {
   display: grid;
-  max-height: 46vh;
+  max-height: 58dvh;
   margin: 12px 0;
   overflow: auto;
   place-items: start center;
@@ -1149,6 +1149,19 @@ body[data-step="right"] .analyze-capture {
   width: 100%;
   height: auto;
   display: block;
+}
+
+.share-sheet.expanded .share-panel {
+  inset: 10px;
+  left: 10px;
+  bottom: 10px;
+  width: auto;
+  max-height: none;
+  transform: none;
+}
+
+.share-sheet.expanded .share-preview-frame {
+  max-height: calc(100dvh - 190px);
 }
 
 .share-actions {
