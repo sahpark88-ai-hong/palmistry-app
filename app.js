@@ -29,6 +29,8 @@ const state = {
   lowQualityConfirmed: false,
   isAnalyzing: false,
   isSharing: false,
+  shareBlob: null,
+  shareUrl: null,
   deepClickCount: 0,
   sourceReturnTarget: null,
 };
@@ -872,6 +874,54 @@ function setShareBusy(isBusy) {
 }
 
 async function shareOrDownloadCard(blob, scores) {
+  openSharePreview(blob);
+  updateText("#mobileResultScore", "이미지 준비");
+}
+
+function openSharePreview(blob) {
+  if (state.shareUrl) URL.revokeObjectURL(state.shareUrl);
+  state.shareBlob = blob;
+  state.shareUrl = URL.createObjectURL(blob);
+  const previewImage = $("#sharePreviewImage");
+  const openLink = $("#openShareImageLink");
+  const downloadLink = $("#downloadShareImageLink");
+  if (previewImage) previewImage.src = state.shareUrl;
+  if (openLink) openLink.href = state.shareUrl;
+  if (downloadLink) downloadLink.href = state.shareUrl;
+  $("#shareSheet")?.classList.add("open");
+  $("#shareSheet")?.setAttribute("aria-hidden", "false");
+  document.body.classList.add("share-open");
+}
+
+function closeSharePreview() {
+  $("#shareSheet")?.classList.remove("open");
+  $("#shareSheet")?.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("share-open");
+}
+
+async function nativeSharePreparedImage() {
+  if (!state.shareBlob) return;
+  const file = new File([state.shareBlob], "cyberpalm-result.png", { type: "image/png" });
+  const canUseNativeShare =
+    window.isSecureContext &&
+    ["http:", "https:"].includes(window.location.protocol) &&
+    navigator.share &&
+    navigator.canShare?.({ files: [file] });
+
+  if (canUseNativeShare) {
+    await navigator.share({
+      files: [file],
+      title: "Palmistry AI 결과",
+      text: "Palmistry AI 분석 결과 이미지입니다.",
+    });
+    updateText("#mobileResultScore", "공유완료");
+    return;
+  }
+
+  $("#openShareImageLink")?.click();
+}
+
+async function shareOrDownloadCardLegacy(blob, scores) {
   const file = new File([blob], "cyberpalm-result.png", { type: "image/png" });
   const canUseNativeShare =
     window.isSecureContext &&
@@ -1123,6 +1173,9 @@ function resetApp() {
   state.lowQualityConfirmed = false;
   state.isAnalyzing = false;
   state.isSharing = false;
+  state.shareBlob = null;
+  if (state.shareUrl) URL.revokeObjectURL(state.shareUrl);
+  state.shareUrl = null;
   state.deepClickCount = 0;
   ["#mobilePreview"].forEach((selector) => {
     const image = $(selector);
@@ -1181,6 +1234,7 @@ $("#leftCaptureButton")?.addEventListener("click", () => openSourceSheet("left")
 $("#rightCaptureButton")?.addEventListener("click", () => openSourceSheet("right"));
 $("#cameraSourceButton")?.addEventListener("click", () => triggerSource("camera"));
 $("#gallerySourceButton")?.addEventListener("click", () => triggerSource("gallery"));
+$("#nativeShareButton")?.addEventListener("click", nativeSharePreparedImage);
 $("#restartCaptureButton")?.addEventListener("click", returnToCapture);
 $("#reanalyzeButton")?.addEventListener("click", analyze);
 $("#shareCardButton")?.addEventListener("click", () => createShareCard("summary"));
@@ -1196,9 +1250,16 @@ $$("[data-close-source]").forEach((button) => {
   button.addEventListener("click", closeSourceSheet);
 });
 
+$$("[data-close-share]").forEach((button) => {
+  button.addEventListener("click", closeSharePreview);
+});
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && $("#sourceSheet")?.classList.contains("open")) {
     closeSourceSheet();
+  }
+  if (event.key === "Escape" && $("#shareSheet")?.classList.contains("open")) {
+    closeSharePreview();
   }
   trapSourceSheetFocus(event);
 });

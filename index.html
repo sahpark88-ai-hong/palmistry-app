@@ -277,6 +277,25 @@
         </div>
       </div>
 
+      <div class="share-sheet" id="shareSheet" aria-hidden="true">
+        <div class="source-backdrop" data-close-share></div>
+        <div class="share-panel" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+          <div class="source-handle"></div>
+          <p class="eyebrow">Result Image</p>
+          <h2 id="shareTitle">결과 이미지 저장</h2>
+          <p class="source-help">이미지를 길게 눌러 저장하거나, 공유하기로 카톡/메신저에 보낼 수 있습니다.</p>
+          <div class="share-preview-frame">
+            <img id="sharePreviewImage" alt="결과 공유 이미지 미리보기" />
+          </div>
+          <div class="share-actions">
+            <button class="primary-button" id="nativeShareButton" type="button">공유하기</button>
+            <a class="secondary-button share-open-link" id="openShareImageLink" target="_blank" rel="noopener">이미지 열기</a>
+            <a class="secondary-button share-open-link" id="downloadShareImageLink" download="cyberpalm-result.png">다운로드</a>
+          </div>
+          <button class="source-cancel" type="button" data-close-share>닫기</button>
+        </div>
+      </div>
+
       <section class="disclaimer">
         본 서비스는 엔터테인먼트 및 자기성찰 목적의 콘텐츠입니다. 건강, 재정, 법률, 직업 등 중요한 의사결정의 근거로 사용하지 마세요.
       </section>

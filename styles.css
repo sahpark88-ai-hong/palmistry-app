@@ -33,6 +33,10 @@ body.source-open {
   overflow: hidden;
 }
 
+body.share-open {
+  overflow: hidden;
+}
+
 button,
 label {
   font: inherit;
@@ -989,8 +993,16 @@ body[data-step="right"] .analyze-capture {
   display: none;
 }
 
-.source-sheet.open {
+.source-sheet.open,
+.share-sheet.open {
   display: block;
+}
+
+.share-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 32;
+  display: none;
 }
 
 .source-backdrop {
@@ -1013,6 +1025,21 @@ body[data-step="right"] .analyze-capture {
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55), 0 0 28px rgba(32, 240, 255, 0.14);
 }
 
+.share-panel {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  width: min(420px, calc(100% - 24px));
+  max-height: calc(100vh - 28px);
+  padding: 14px;
+  overflow: auto;
+  transform: translateX(-50%);
+  border: 1px solid rgba(126, 245, 255, 0.28);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(18, 25, 48, 0.98), rgba(8, 12, 26, 0.98));
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55), 0 0 28px rgba(32, 240, 255, 0.14);
+}
+
 .source-handle {
   width: 42px;
   height: 4px;
@@ -1022,6 +1049,11 @@ body[data-step="right"] .analyze-capture {
 }
 
 .source-panel h2 {
+  margin-bottom: 6px;
+  font-size: 20px;
+}
+
+.share-panel h2 {
   margin-bottom: 6px;
   font-size: 20px;
 }
@@ -1100,6 +1132,40 @@ body[data-step="right"] .analyze-capture {
   border: 1px solid rgba(126, 245, 255, 0.16);
   color: var(--muted);
   background: rgba(255, 255, 255, 0.04);
+}
+
+.share-preview-frame {
+  display: grid;
+  max-height: 46vh;
+  margin: 12px 0;
+  overflow: auto;
+  place-items: start center;
+  border: 1px solid rgba(126, 245, 255, 0.22);
+  border-radius: 8px;
+  background: rgba(3, 9, 22, 0.72);
+}
+
+.share-preview-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.share-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.share-actions .primary-button {
+  grid-column: 1 / -1;
+}
+
+.share-open-link {
+  display: grid;
+  min-height: 42px;
+  place-items: center;
+  text-decoration: none;
 }
 
 .disclaimer {
