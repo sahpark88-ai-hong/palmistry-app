@@ -1,5 +1,11 @@
 const REQUESTED_ANALYSIS_ENGINE = new URLSearchParams(window.location.search).get("engine");
-const ANALYSIS_ENGINE = REQUESTED_ANALYSIS_ENGINE === "api" ? "api" : "browser";
+const CAN_USE_REMOTE_API = ["http:", "https:"].includes(window.location.protocol);
+const ANALYSIS_ENGINE =
+  REQUESTED_ANALYSIS_ENGINE === "browser"
+    ? "browser"
+    : REQUESTED_ANALYSIS_ENGINE === "api" || CAN_USE_REMOTE_API
+      ? "api"
+      : "browser";
 const API_ANALYSIS_ENDPOINT = "/api/palm-analysis";
 const DEFAULT_ANALYSIS_ENGINE_LABEL = "브라우저 분석";
 const FALLBACK_ANALYSIS_ENGINE_LABEL = "브라우저 분석(대체)";
@@ -158,7 +164,7 @@ function renderStatuses() {
 
 function getEngineModeLabel() {
   if (ANALYSIS_ENGINE !== "api") return DEFAULT_ANALYSIS_ENGINE_LABEL;
-  return ["http:", "https:"].includes(window.location.protocol) ? "API 분석 시도" : "API는 서버 필요";
+  return CAN_USE_REMOTE_API ? "API 분석" : "API는 서버 필요";
 }
 
 function updateEngineModeChip() {

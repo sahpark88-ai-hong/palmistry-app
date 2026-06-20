@@ -1035,7 +1035,7 @@ body[data-step="right"] .analyze-capture {
 
 .source-actions {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .source-option,
@@ -1047,11 +1047,11 @@ body[data-step="right"] .analyze-capture {
 
 .source-option {
   display: grid;
-  grid-template-columns: 44px minmax(0, 1fr);
-  column-gap: 10px;
+  grid-template-columns: 38px minmax(0, 1fr);
+  column-gap: 9px;
   align-items: center;
-  min-height: 72px;
-  padding: 12px;
+  min-height: 58px;
+  padding: 9px 10px;
   border: 1px solid rgba(126, 245, 255, 0.22);
   color: var(--text);
   text-align: left;
@@ -1060,8 +1060,8 @@ body[data-step="right"] .analyze-capture {
 
 .source-option b {
   display: grid;
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   place-items: center;
   border: 1px solid rgba(126, 245, 255, 0.22);
   border-radius: 8px;
@@ -1074,15 +1074,19 @@ body[data-step="right"] .analyze-capture {
 .source-option span {
   display: block;
   color: #f4fbff;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 900;
+  line-height: 1.15;
+  white-space: nowrap;
 }
 
 .source-option small {
   display: block;
-  margin-top: 3px;
+  margin-top: 2px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 11px;
+  line-height: 1.25;
+  white-space: nowrap;
 }
 
 .source-option:hover {
