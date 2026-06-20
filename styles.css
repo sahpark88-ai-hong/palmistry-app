@@ -1003,6 +1003,11 @@ body[data-step="right"] .analyze-capture {
   inset: 0;
   z-index: 32;
   display: none;
+  pointer-events: none;
+}
+
+.share-sheet.open {
+  pointer-events: auto;
 }
 
 .source-backdrop {

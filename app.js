@@ -1235,4 +1235,5 @@ document.addEventListener("keydown", (event) => {
 renderStatuses();
 setPipeline(1);
 setFlow("capture");
+closeSharePreview();
 

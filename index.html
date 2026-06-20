@@ -279,18 +279,11 @@
 
       <div class="share-sheet" id="shareSheet" aria-hidden="true">
         <div class="source-backdrop" data-close-share></div>
-        <div class="share-panel" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
-          <div class="source-handle"></div>
-          <p class="eyebrow">Result Image</p>
-          <h2 id="shareTitle">결과 이미지 저장</h2>
-          <p class="source-help">이미지를 길게 눌러 저장하거나 공유하세요. 다운로드 위치는 브라우저/폰 설정에 따라 달라집니다.</p>
+        <div class="share-panel" role="dialog" aria-modal="true">
+          <h2>결과 이미지</h2>
+          <p class="source-help">아래 이미지를 길게 눌러 저장하거나 공유하세요.</p>
           <div class="share-preview-frame">
-            <img id="sharePreviewImage" alt="결과 공유 이미지 미리보기" />
-          </div>
-          <div class="share-actions">
-            <button class="primary-button" id="nativeShareButton" type="button">크게보기</button>
-            <button class="secondary-button" id="openShareImageButton" type="button">화면 맞춤</button>
-            <a class="secondary-button share-open-link" id="downloadShareImageLink" download="cyberpalm-result.png">보조저장</a>
+            <img id="sharePreviewImage" alt="결과 이미지" />
           </div>
           <button class="source-cancel" type="button" data-close-share>닫기</button>
         </div>
