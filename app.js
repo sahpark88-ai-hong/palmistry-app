@@ -31,6 +31,7 @@ const state = {
   isSharing: false,
   shareBlob: null,
   shareUrl: null,
+  shareDataUrl: null,
   deepClickCount: 0,
   sourceReturnTarget: null,
 };
@@ -883,11 +884,18 @@ function openSharePreview(blob) {
   if (state.shareUrl) URL.revokeObjectURL(state.shareUrl);
   state.shareBlob = blob;
   state.shareUrl = URL.createObjectURL(blob);
+  state.shareDataUrl = null;
   const previewImage = $("#sharePreviewImage");
   const downloadLink = $("#downloadShareImageLink");
-  if (previewImage) previewImage.src = state.shareUrl;
-  if (downloadLink) downloadLink.href = state.shareUrl;
+  const reader = new FileReader();
+  reader.onload = () => {
+    state.shareDataUrl = String(reader.result || "");
+    if (previewImage) previewImage.src = state.shareDataUrl;
+    if (downloadLink) downloadLink.href = state.shareDataUrl;
+  };
+  reader.readAsDataURL(blob);
   $("#shareSheet")?.classList.add("open");
+  $("#shareSheet")?.classList.add("expanded");
   $("#shareSheet")?.setAttribute("aria-hidden", "false");
   document.body.classList.add("share-open");
 }
@@ -900,25 +908,9 @@ function closeSharePreview() {
 }
 
 async function nativeSharePreparedImage() {
-  if (!state.shareBlob) return;
-  const file = new File([state.shareBlob], "cyberpalm-result.png", { type: "image/png" });
-  const canUseNativeShare =
-    window.isSecureContext &&
-    ["http:", "https:"].includes(window.location.protocol) &&
-    navigator.share &&
-    navigator.canShare?.({ files: [file] });
-
-  if (canUseNativeShare) {
-    await navigator.share({
-      files: [file],
-      title: "Palmistry AI 결과",
-      text: "Palmistry AI 분석 결과 이미지입니다.",
-    });
-    updateText("#mobileResultScore", "공유완료");
-    return;
-  }
-
+  $("#shareSheet")?.classList.add("expanded");
   $("#sharePreviewImage")?.scrollIntoView({ block: "center" });
+  updateText("#mobileResultScore", "길게 눌러 저장");
 }
 
 function expandSharePreview() {
@@ -1150,6 +1142,7 @@ function resetApp() {
   state.shareBlob = null;
   if (state.shareUrl) URL.revokeObjectURL(state.shareUrl);
   state.shareUrl = null;
+  state.shareDataUrl = null;
   state.deepClickCount = 0;
   ["#mobilePreview"].forEach((selector) => {
     const image = $(selector);

@@ -1027,13 +1027,12 @@ body[data-step="right"] .analyze-capture {
 
 .share-panel {
   position: absolute;
-  left: 50%;
-  bottom: 14px;
-  width: min(420px, calc(100% - 24px));
-  max-height: calc(100dvh - 28px);
+  inset: 8px;
+  width: auto;
+  max-height: none;
   padding: 14px;
   overflow: auto;
-  transform: translateX(-50%);
+  transform: none;
   border: 1px solid rgba(126, 245, 255, 0.28);
   border-radius: 18px;
   background: linear-gradient(180deg, rgba(18, 25, 48, 0.98), rgba(8, 12, 26, 0.98));
@@ -1136,7 +1135,7 @@ body[data-step="right"] .analyze-capture {
 
 .share-preview-frame {
   display: grid;
-  max-height: 58dvh;
+  max-height: calc(100dvh - 190px);
   margin: 12px 0;
   overflow: auto;
   place-items: start center;
@@ -1149,6 +1148,7 @@ body[data-step="right"] .analyze-capture {
   width: 100%;
   height: auto;
   display: block;
+  min-height: 1px;
 }
 
 .share-sheet.expanded .share-panel {
