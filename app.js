@@ -941,7 +941,7 @@ function createShareCard(mode = "summary") {
 
   const canvas = document.createElement("canvas");
   canvas.width = 1080;
-  canvas.height = mode === "deep" ? 2240 : 3120;
+  canvas.height = mode === "deep" ? 2860 : 3920;
   const ctx = canvas.getContext("2d");
   const scores = state.scores;
   const quality = getOverallQuality();
@@ -973,7 +973,7 @@ function createShareCard(mode = "summary") {
     ctx.stroke();
   }
 
-  const glow = ctx.createRadialGradient(540, 650, 80, 540, 650, 620);
+  const glow = ctx.createRadialGradient(540, 450, 80, 540, 450, 520);
   glow.addColorStop(0, "rgba(32, 240, 255, 0.32)");
   glow.addColorStop(0.55, "rgba(255, 77, 255, 0.12)");
   glow.addColorStop(1, "rgba(32, 240, 255, 0)");
@@ -995,38 +995,38 @@ function createShareCard(mode = "summary") {
   ctx.strokeStyle = "rgba(32, 240, 255, 0.55)";
   ctx.lineWidth = 5;
   ctx.beginPath();
-  ctx.arc(540, 575, 300, 0, Math.PI * 2);
+  ctx.arc(540, 500, 240, 0, Math.PI * 2);
   ctx.stroke();
 
   ctx.strokeStyle = "rgba(255, 77, 255, 0.72)";
   ctx.lineWidth = 12;
   ctx.lineCap = "round";
   ctx.beginPath();
-  ctx.moveTo(350, 735);
-  ctx.bezierCurveTo(300, 560, 390, 410, 530, 350);
+  ctx.moveTo(390, 625);
+  ctx.bezierCurveTo(350, 500, 420, 370, 530, 330);
   ctx.stroke();
   ctx.strokeStyle = "rgba(32, 240, 255, 0.84)";
   ctx.beginPath();
-  ctx.moveTo(295, 610);
-  ctx.bezierCurveTo(450, 540, 650, 540, 805, 625);
+  ctx.moveTo(330, 520);
+  ctx.bezierCurveTo(450, 470, 650, 470, 760, 535);
   ctx.stroke();
   ctx.beginPath();
-  ctx.moveTo(355, 470);
-  ctx.bezierCurveTo(505, 540, 670, 515, 792, 420);
+  ctx.moveTo(375, 410);
+  ctx.bezierCurveTo(505, 465, 660, 445, 760, 370);
   ctx.stroke();
   ctx.beginPath();
-  ctx.moveTo(560, 820);
-  ctx.bezierCurveTo(515, 660, 550, 500, 630, 355);
+  ctx.moveTo(560, 700);
+  ctx.bezierCurveTo(525, 590, 555, 455, 620, 335);
   ctx.stroke();
 
   ctx.textAlign = "center";
   ctx.fillStyle = "#ffffff";
   ctx.font = "900 58px Arial, sans-serif";
-  ctx.fillText(`분석 신뢰도 ${scores.confidence}%`, 540, 980);
+  ctx.fillText(`분석 신뢰도 ${scores.confidence}%`, 540, 830);
 
   ctx.fillStyle = quality.level === "bad" ? "#ff7a8a" : quality.level === "warn" ? "#ffd166" : "#49ffb3";
   ctx.font = "900 30px Arial, sans-serif";
-  ctx.fillText(`이미지 품질: ${quality.label}`, 540, 1035);
+  ctx.fillText(`이미지 품질: ${quality.label}`, 540, 885);
 
   const scoreItems = [
     ["Life Line", `${scores.life}%`],
@@ -1038,7 +1038,7 @@ function createShareCard(mode = "summary") {
     const col = index % 2;
     const row = Math.floor(index / 2);
     const x = 110 + col * 455;
-    const y = 1115 + row * 160;
+    const y = 950 + row * 145;
     ctx.fillStyle = "rgba(255, 255, 255, 0.07)";
     ctx.strokeStyle = "rgba(126, 245, 255, 0.25)";
     ctx.lineWidth = 2;
@@ -1058,20 +1058,20 @@ function createShareCard(mode = "summary") {
   ctx.fillStyle = "rgba(255, 255, 255, 0.07)";
   ctx.strokeStyle = "rgba(126, 245, 255, 0.22)";
   ctx.beginPath();
-  ctx.roundRect(110, 1450, 860, 290, 24);
+  ctx.roundRect(110, 1275, 860, 250, 24);
   ctx.fill();
   ctx.stroke();
 
   ctx.textAlign = "left";
   ctx.fillStyle = "#20f0ff";
   ctx.font = "900 30px Arial, sans-serif";
-  ctx.fillText(advice.title, 150, 1510);
+  ctx.fillText(advice.title, 150, 1330);
   ctx.fillStyle = "#f4fbff";
   ctx.font = "700 30px Arial, sans-serif";
-  drawWrappedText(ctx, report.summary, 150, 1570, 780, 44, 2);
+  drawWrappedText(ctx, report.summary, 150, 1385, 780, 40, 2);
   ctx.fillStyle = "#ffc9d0";
   ctx.font = "600 24px Arial, sans-serif";
-  drawWrappedText(ctx, report.advice, 150, 1660, 780, 34, 2);
+  drawWrappedText(ctx, report.advice, 150, 1470, 780, 32, 2);
 
   const summaryItems = [
     ["왼손", interpretation.left],
@@ -1093,13 +1093,15 @@ function createShareCard(mode = "summary") {
   ];
   const reportItems = mode === "deep" ? deepItems : summaryItems;
 
-  let reportY = 1818;
+  const cardHeight = mode === "deep" ? 250 : 202;
+  const cardGap = mode === "deep" ? 26 : 18;
+  let reportY = 1600;
   reportItems.forEach(([title, text]) => {
     ctx.fillStyle = "rgba(255, 255, 255, 0.055)";
     ctx.strokeStyle = "rgba(126, 245, 255, 0.16)";
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.roundRect(110, reportY, 860, 124, 18);
+    ctx.roundRect(110, reportY, 860, cardHeight, 18);
     ctx.fill();
     ctx.stroke();
     ctx.textAlign = "left";
@@ -1108,8 +1110,8 @@ function createShareCard(mode = "summary") {
     ctx.fillText(title, 145, reportY + 38);
     ctx.fillStyle = "#f4fbff";
     ctx.font = "600 23px Arial, sans-serif";
-    drawWrappedText(ctx, text, 145, reportY + 76, 790, 31, 2);
-    reportY += 138;
+    drawWrappedText(ctx, text, 145, reportY + 78, 790, 31, mode === "deep" ? 5 : 4);
+    reportY += cardHeight + cardGap;
   });
 
   ctx.textAlign = "center";
