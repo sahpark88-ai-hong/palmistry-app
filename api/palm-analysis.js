@@ -1,4 +1,4 @@
-const DEFAULT_MODEL = "gemini-3.5-flash";
+const DEFAULT_MODEL = "gemini-2.5-flash";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -43,7 +43,16 @@ export default async function handler(req, res) {
   }
 
   const text = payload?.candidates?.[0]?.content?.parts?.map((part) => part.text || "").join("") || "";
-  const result = parseGeminiJson(text);
+  let result;
+  try {
+    result = parseGeminiJson(text);
+  } catch (error) {
+    return res.status(502).json({
+      error: "Gemini response did not contain valid JSON",
+      detail: error.message,
+      engineLabel: "Gemini 분석 실패",
+    });
+  }
   return res.status(200).json({
     engineLabel: `Gemini ${model}`,
     scores: result.scores,
@@ -65,12 +74,6 @@ function buildGeminiRequest(leftImage, rightImage, quality) {
     ],
     generationConfig: {
       temperature: 0.45,
-      responseFormat: {
-        text: {
-          mimeType: "application/json",
-          schema: responseSchema(),
-        },
-      },
     },
   };
 }
@@ -98,6 +101,9 @@ function buildPrompt(quality) {
     "Use the images only as visual inspiration for a playful self-reflection report.",
     "Scores must be integers from 0 to 100.",
     "Keep every insight sentence concise and suitable for a mobile UI.",
+    "Return JSON only. Do not wrap it in Markdown.",
+    "Use this exact JSON shape:",
+    JSON.stringify(responseSchema()),
     `Local image quality metadata: ${JSON.stringify(quality || {})}`,
   ].join("\n");
 }
