@@ -129,8 +129,8 @@ function renderStatuses() {
   $("#rightPreviewItem")?.classList.toggle("ready", rightReady);
   renderQuality("left");
   renderQuality("right");
-  updateText("#leftPreviewText", leftReady ? "?좏깮 ?꾨즺" : "?湲?);
-  updateText("#rightPreviewText", rightReady ? "?좏깮 ?꾨즺" : "?湲?);
+  updateText("#leftPreviewText", leftReady ? "선택 완료" : "대기");
+  updateText("#rightPreviewText", rightReady ? "선택 완료" : "대기");
   if (analyzeButton) {
     analyzeButton.classList.remove("quality-good", "quality-warn", "quality-bad");
     if (overallQuality) analyzeButton.classList.add(`quality-${overallQuality.level}`);
@@ -138,7 +138,7 @@ function renderStatuses() {
     analyzeButton.setAttribute("aria-disabled", String(step !== "analyze" || state.isAnalyzing));
     analyzeButton.textContent =
       state.isAnalyzing
-        ? "遺꾩꽍 吏꾪뻾 以?
+        ? "분석 진행 중"
         : step === "left"
         ? "?쇱넀 ?대?吏 ?꾩슂"
         : step === "right"
@@ -183,20 +183,20 @@ function renderCaptureGuide(leftReady = Boolean(state.left), rightReady = Boolea
 
   const overall = leftReady && rightReady ? getOverallQuality() : null;
   let level = "warn";
-  let title = "?쇱넀 珥ъ쁺 以鍮?;
-  let text = "?먮컮???꾩껜媛 ?붾㈃ 以묒븰???ㅼ뼱?ㅺ퀬 ?먭툑??蹂댁씠?꾨줉 諛앹? 怨녹뿉??珥ъ쁺??二쇱꽭??";
+  let title = "왼손 촬영 준비";
+  let text = "손바닥 전체가 화면 중앙에 들어오고 손금이 잘 보이도록 밝은 곳에서 촬영해 주세요.";
 
   if (leftReady && !rightReady) {
-    title = "?ㅻⅨ??珥ъ쁺 以鍮?;
-    text = "?쇱넀怨?鍮꾩듂??嫄곕━? 諛앷린濡??ㅻⅨ???먮컮?μ쓣 ?뺣㈃?먯꽌 珥ъ쁺??二쇱꽭??";
+    title = "오른손 촬영 준비";
+    text = "왼손과 비슷한 거리와 밝기로 오른손 손바닥을 정면에서 촬영해 주세요.";
   } else if (leftReady && rightReady && overall?.level === "bad") {
     level = "bad";
-    title = state.lowQualityConfirmed ? "李멸퀬 遺꾩꽍 ?湲? : "?대?吏 ?ㅼ떆 ?좏깮 沅뚯옣";
+    title = state.lowQualityConfirmed ? "참고 분석 대기" : "이미지 다시 선택 권장";
     text = state.lowQualityConfirmed
       ? "?꾩옱 ?ъ쭊?쇰줈 李멸퀬 遺꾩꽍??吏꾪뻾?섎젮硫??꾨옒 踰꾪듉????踰????뚮윭 二쇱꽭??"
       : "?먮컮?μ씠 ?대몼嫄곕굹 ?먮━硫?遺꾩꽍 ?좊ː?꾧? ??븘吏묐땲?? 諛앹? 諛곌꼍?먯꽌 ?ㅼ떆 珥ъ쁺??二쇱꽭??";
   } else if (leftReady && rightReady && overall?.level === "warn") {
-    title = "李멸퀬 遺꾩꽍 媛??;
+    title = "참고 분석 가능";
     text = "遺꾩꽍? 媛?ν븯吏留??쇰? ?좊챸?꾧? 遺議깊빀?덈떎. ??諛앷쾶 珥ъ쁺?섎㈃ 寃곌낵媛 ?덉젙?곸엯?덈떎.";
   } else if (leftReady && rightReady) {
     level = "good";
@@ -220,7 +220,7 @@ function renderQuality(hand) {
   item.classList.remove("quality-good", "quality-warn", "quality-bad");
   item.classList.toggle("hand-mismatch", Boolean(handCheck?.mismatch));
   if (!quality) {
-    text.textContent = "?덉쭏 ?湲?;
+    text.textContent = "품질 대기";
     return;
   }
 
@@ -320,7 +320,7 @@ async function updateHandCheck(hand) {
     ...detected,
     mismatch,
     needsReview: detected.side === "unknown" || detected.level !== "high",
-    message: mismatch ? `${detected.side === "left" ? "?쇱넀" : "?ㅻⅨ??}泥섎읆 蹂댁엫` : "",
+    message: mismatch ? `${detected.side === "left" ? "왼손" : "오른손"}처럼 보임` : "",
   };
 }
 
@@ -440,7 +440,7 @@ async function updateHandQuality(hand) {
 
 function getOverallQuality() {
   const qualities = [state.quality.left, state.quality.right].filter(Boolean);
-  if (qualities.length < 2) return { level: "warn", label: "?덉쭏 ?뺤씤 以? };
+  if (qualities.length < 2) return { level: "warn", label: "품질 확인 중" };
   if (qualities.some((item) => item.level === "bad")) return { level: "bad", label: "?ъ눋??沅뚯옣" };
   if (qualities.some((item) => item.level === "warn")) return { level: "warn", label: "李멸퀬 遺꾩꽍" };
   return { level: "good", label: "?덉쭏 ?묓샇" };
@@ -690,7 +690,7 @@ function analyze() {
   if (state.isAnalyzing) return;
 
   if (!state.left || !state.right) {
-    const nextStep = !state.left ? "?쇱넀" : "?ㅻⅨ??;
+    const nextStep = !state.left ? "왼손" : "오른손";
     updateText("#mobileProgress", `${nextStep} ?꾩슂`);
     document.body.dataset.step = !state.left ? "left" : "right";
     return;
@@ -708,19 +708,19 @@ function analyze() {
   document.body.classList.add("analyzing");
   renderStatuses();
   setFlow("scanning");
-  setScanProgress(18, "?먮컮???곸뿭 異붿텧 以?, 2);
+  setScanProgress(18, "손바닥 영역 추출 중", 2);
   setPipeline(2);
   updateText("#mobileProgress", "42%");
 
   setTimeout(() => {
     setPipeline(3);
     updateText("#mobileProgress", "78%");
-    setScanProgress(58, "?먭툑 ?꾨낫???먯깋 以?, 3);
+    setScanProgress(58, "손금 후보 탐색 중", 3);
   }, 650);
 
   setTimeout(async () => {
     try {
-      setScanProgress(82, "?대?吏 ?뱀쭠 怨꾩궛 以?, 3);
+      setScanProgress(82, "이미지 특징 계산 중", 3);
       const result = await runPalmAnalysis();
       state.analysisResult = result;
       state.scores = result.scores;
@@ -754,9 +754,9 @@ function renderResults() {
   updateText("#mobileHeadScore", `${scores.head}%`);
   updateText("#mobileFateScore", `${scores.fate}%`);
   updateText("#analysisEngineText", analysis.engineLabel || DEFAULT_ANALYSIS_ENGINE_LABEL);
-  updateText("#lifeBasis", lineBasis(scores.life, "醫뚰븯??));
-  updateText("#headBasis", lineBasis(scores.head, "以묒븰 媛濡?));
-  updateText("#heartBasis", lineBasis(scores.heart, "?곷떒 媛濡?));
+  updateText("#lifeBasis", lineBasis(scores.life, "좌하단"));
+  updateText("#headBasis", lineBasis(scores.head, "중앙 가로"));
+  updateText("#heartBasis", lineBasis(scores.heart, "상단 가로"));
   updateText("#fateBasis", lineBasis(scores.fate, "以묒븰 ?몃줈"));
   updateText("#resultQualityText", quality.label);
   const summary = $(".quality-summary");
@@ -767,7 +767,7 @@ function renderResults() {
   resultScreen?.classList.add(`quality-${quality.level}`);
   const restartButton = $("#restartCaptureButton");
   if (restartButton) {
-    restartButton.textContent = quality.level === "bad" ? "?ㅼ떆 珥ъ쁺?섍린" : "?대?吏 蹂寃?;
+    restartButton.textContent = quality.level === "bad" ? "다시 촬영하기" : "이미지 변경";
   }
   const adviceBox = $("#analysisAdvice");
   adviceBox?.classList.remove("good", "warn", "bad");
@@ -1075,14 +1075,14 @@ function createShareCard(mode = "summary") {
 
   const summaryItems = [
     ["?쇱넀", interpretation.left],
-    ["?ㅻⅨ??, interpretation.right],
+    ["오른손", interpretation.right],
     ["?깊뼢", interpretation.personality],
     ["媛먯젙", interpretation.emotion],
     ["?ш퀬", interpretation.thinking],
-    ["愿怨?, interpretation.relation],
+    ["관계", interpretation.relation],
     ["?듭떖 ?붿빟", report.summary],
     ["?꾩옱 ?먮쫫", report.current],
-    ["媛먯젙怨?愿怨?, report.emotion],
+    ["감정과 관계", report.emotion],
     ["?ㅻ뒛??議곗뼵", report.advice],
   ];
   const deepItems = [
@@ -1115,7 +1115,7 @@ function createShareCard(mode = "summary") {
   ctx.textAlign = "center";
   ctx.fillStyle = "#93a8ba";
   ctx.font = "700 24px Arial, sans-serif";
-  ctx.fillText("?뷀꽣?뚯씤癒쇳듃 諛??먭린?깆같 紐⑹쟻??李멸퀬 由ы룷??, 540, reportY + 38);
+  ctx.fillText("엔터테인먼트 및 자기성찰 목적의 참고 리포트", 540, reportY + 38);
 
   canvasToPngBlob(canvas)
     .then((blob) => shareOrDownloadCard(blob, scores))
@@ -1173,19 +1173,19 @@ function resetApp() {
   updateText("#romanceInsight", "愿怨꾧? ?쒖옉?섍퀬 源딆뼱吏??뚯쓽 ?띾룄? ?쒗쁽 諛⑹떇???댄렣遊낅땲??");
   updateText("#affectionInsight", "?좎젙??二쇨퀬諛쏅뒗 諛⑹떇怨?移쒕?媛먯쓽 由щ벉??李멸퀬?⑹쑝濡??댁꽍?⑸땲??");
   updateText("#intimacyInsight", "?깆쟻???쒗쁽???꾨땲??移쒕?媛? ?좊ː, 嫄곕━媛먯쓽 ?먮쫫??以묒떖?쇰줈 ?댁꽍?⑸땲??");
-  updateText("#analysisAdviceTitle", "遺꾩꽍 湲곗? ?뺤씤 以?);
+  updateText("#analysisAdviceTitle", "분석 기준 확인 중");
   updateText("#analysisAdviceText", "?묒넀 ?ъ쭊??諛앷린, ?좊챸?? ?먭툑 ?꾨낫?좎쓣 ?④퍡 ?뺤씤?⑸땲??");
   $(".quality-summary")?.classList.remove("good", "warn", "bad");
   $("#analysisAdvice")?.classList.remove("good", "warn", "bad");
   $(".result-screen")?.classList.remove("quality-good", "quality-warn", "quality-bad");
-  updateText("#restartCaptureButton", "?대?吏 蹂寃?);
+  updateText("#restartCaptureButton", "이미지 변경");
   const shareButton = $("#shareCardButton");
   if (shareButton) {
     shareButton.disabled = false;
     shareButton.textContent = "寃곌낵 ?대?吏 怨듭쑀";
   }
   updateText("#perspicaciousButton", "Perspicacious Analysis");
-  setScanProgress(0, "?대?吏 ?꾩쿂由?以?, 1);
+  setScanProgress(0, "이미지 전처리 중", 1);
   setFlow("capture");
   renderStatuses();
   setPipeline(1);
