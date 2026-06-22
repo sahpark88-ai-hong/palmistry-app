@@ -1,4 +1,4 @@
-const DEFAULT_MODEL = "gemini-2.5-flash";
+﻿const DEFAULT_MODEL = "gemini-2.5-flash";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -53,6 +53,7 @@ export default async function handler(req, res) {
       engineLabel: "Gemini 분석 실패",
     });
   }
+
   return res.status(200).json({
     engineLabel: `Gemini ${model}`,
     scores: result.scores,
@@ -99,8 +100,12 @@ function buildPrompt(quality) {
     "You are generating an entertainment-only palm reading report from left and right palm photos.",
     "Return Korean text. Do not provide medical, legal, financial, or deterministic claims.",
     "Use the images only as visual inspiration for a playful self-reflection report.",
+    "Use a balanced tone: mostly positive and encouraging, but include one realistic caution and one practical improvement suggestion overall.",
+    "For every insight field, avoid pure praise. Mention a strength plus a gentle caution or balancing advice in one concise sentence.",
+    "Do not frighten, shame, diagnose, or predict fixed destiny. Phrase cautions as self-reflection hints.",
     "Scores must be integers from 0 to 100.",
-    "Keep every insight sentence concise and suitable for a mobile UI.",
+    "Keep every insight sentence concise and suitable for a mobile UI, preferably one sentence each.",
+    "The advice.text must include a positive point, a caution point, and an improvement suggestion.",
     "Return JSON only. Do not wrap it in Markdown.",
     "Use this exact JSON shape:",
     JSON.stringify(responseSchema()),
